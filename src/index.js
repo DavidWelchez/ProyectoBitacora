@@ -12,7 +12,7 @@ const { database } = require('./keys');
 
 // Intializations
 const app = express();
-//require('./lib/passport');
+require('./lib/passport');
 
 // Settings
 app.set('port', process.env.PORT || 4000);
@@ -38,8 +38,8 @@ app.use(session({
   store: new MySQLStore(database)
 }));
 app.use(flash());
-//app.use(passport.initialize());
-//app.use(passport.session());
+app.use(passport.initialize());
+app.use(passport.session());
 //app.use(validator());
 
 // Global variables
