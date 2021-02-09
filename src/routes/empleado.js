@@ -15,7 +15,7 @@ router.post('/add', async (req, res) => {
         
     };
     await pool.query('INSERT INTO empleados set ?', [newEmpleado]);
-    //req.flash('success', 'Link Saved Successfully');
+    req.flash('success', 'Empleado guardado ');
     res.redirect('/empleado');
 });
 
@@ -23,32 +23,31 @@ router.get('/',  async (req, res) => {
     const empleados = await pool.query('SELECT * FROM empleados');
     res.render('empleado/list', { empleados });
 });
-/*
+
 router.get('/delete/:id', async (req, res) => {
     const { id } = req.params;
-    await pool.query('DELETE FROM links WHERE ID = ?', [id]);
-    req.flash('success', 'Link Removed Successfully');
-    res.redirect('/links');
+    await pool.query('DELETE FROM empleados WHERE ID = ?', [id]);
+    req.flash('success', 'Empleado eliminado');
+    res.redirect('/empleado');
 });
 
 router.get('/edit/:id', async (req, res) => {
     const { id } = req.params;
-    const links = await pool.query('SELECT * FROM links WHERE id = ?', [id]);
-    console.log(links);
-    res.render('links/edit', {link: links[0]});
+    const empleados = await pool.query('SELECT * FROM empleados WHERE id = ?', [id]);
+  
+    res.render('empleado/edit', {empleado: empleados[0]});
 });
 
 router.post('/edit/:id', async (req, res) => {
     const { id } = req.params;
-    const { title, description, url} = req.body; 
-    const newLink = {
-        title,
-        description,
-        url
+    const { empleado } = req.body;
+    const newEmpleado = {
+        empleado
+        
     };
-    await pool.query('UPDATE links set ? WHERE id = ?', [newLink, id]);
-    req.flash('success', 'Link Updated Successfully');
-    res.redirect('/links');
-});*/
+    await pool.query('UPDATE empleados set ? WHERE id = ?', [newEmpleado, id]);
+    req.flash('success', 'Empleado actualizado');
+    res.redirect('/empleado');
+});
 
 module.exports = router;

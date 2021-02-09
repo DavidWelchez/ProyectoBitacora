@@ -1,3 +1,7 @@
+<h1 class="text-center">EMPLEADOS </h1>
+
+
+
 <div class="container p-4">
     <div class="row">
         {{#each empleados}}
@@ -10,11 +14,11 @@
                         </h3>
                     </a>
                    
-                    <a class="btn btn-danger" href="/links/delete/{{id}}">
-                        Delete Link
+                    <a class="btn btn-danger" href="/empleado/delete/{{id}}">
+                        Eliminar
                     </a>
-                    <a class="btn btn-secondary" href="/links/edit/{{id}}">
-                        Edit
+                    <a class="btn btn-secondary" href="/empleado/edit/{{id}}">
+                        Editar
                     </a>
                 </div>
             </div>
@@ -22,10 +26,12 @@
         {{else}}
         <div class="col-md-4 mx-auto">
             <div class="card card-body text-center">
-                <p>There are not Links saved yet.</p>
-                <a href="/links/add">Create One!</a>
+                <p>No tienes empleados creados </p>
+                <a href="/empleado/add">Agregar</a>
             </div>
         </div>
         {{/each}}
     </div>
 </div>
+
+

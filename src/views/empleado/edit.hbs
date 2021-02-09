@@ -1,4 +1,4 @@
-<h1 class="text-center">Agregar empleado </h1>
+<h1 class="text-center">Editar empleado </h1>
 
 
 
@@ -8,9 +8,9 @@
 
             <div class="card">
                 <div class="card-body">
-                    <form action="/empleado/add" method="POST">
+                    <form action="/empleado/edit/{{empleado.id}}" method="POST">
                         <div class="form-group">
-                            <input type="text" name="empleado" class="form-control" placeholder="Nombre del empleado" autofocus>
+                            <input type="text"  name="empleado" class="form-control" placeholder="Nombre del empleado "  value="{{empleado.empleado}}" autofocus>
                         </div>
                         
                         
