@@ -8,8 +8,7 @@ const passport = require('passport');
 const flash = require('connect-flash');
 const MySQLStore = require('express-mysql-session')(session);
 const bodyParser = require('body-parser');
-
-//const { database } = require('./keys');
+const { database } = require('./keys');
 
 // Intializations
 const app = express();
@@ -32,22 +31,22 @@ app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
-/*app.use(session({
+app.use(session({
   secret: 'faztmysqlnodemysql',
   resave: false,
   saveUninitialized: false,
   store: new MySQLStore(database)
 }));
 app.use(flash());
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(validator());*/
+//app.use(passport.initialize());
+//app.use(passport.session());
+//app.use(validator());
 
 // Global variables
 app.use((req, res, next) => {
-  /*app.locals.message = req.flash('message');
+  app.locals.message = req.flash('message');
   app.locals.success = req.flash('success');
-  app.locals.user = req.user;*/
+  app.locals.user = req.user;
   next();
 });
 
@@ -55,6 +54,8 @@ app.use((req, res, next) => {
 app.use(require('./routes/index'));
 app.use(require('./routes/authentication'));
 app.use('/empleado', require('./routes/empleado'));
+app.use('/dashboard', require('./routes/dashboard'));
+
 
 // Public
 app.use(express.static(path.join(__dirname, 'public')));
