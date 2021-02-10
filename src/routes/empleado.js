@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 
 const pool = require('../database');
-//const { isLoggedIn } = require('../lib/auth');
+const { isLoggedIn } = require('../lib/auth');
 
-router.get('/add', (req, res) => {
+router.get('/add', isLoggedIn,(req, res) => {
     res.render('empleado/add');
 });
 
@@ -19,7 +19,7 @@ router.post('/add', async (req, res) => {
     res.redirect('/empleado');
 });
 
-router.get('/',  async (req, res) => {
+router.get('/', isLoggedIn, async (req, res) => {
     const empleados = await pool.query('SELECT * FROM empleados');
     res.render('empleado/list', { empleados });
 });
@@ -31,7 +31,7 @@ router.get('/delete/:id', async (req, res) => {
     res.redirect('/empleado');
 });
 
-router.get('/edit/:id', async (req, res) => {
+router.get('/edit/:id', isLoggedIn,async (req, res) => {
     const { id } = req.params;
     const empleados = await pool.query('SELECT * FROM empleados WHERE id = ?', [id]);
   
