@@ -130,3 +130,54 @@ height: 100%;
 
 
 /**************************************/
+body {
+  background: #f5f6fa;
+font-family: 'Oswald', sans-serif;
+
+  overflow: hidden;
+}
+
+.index {
+  width: 100vw;
+  height: 100vh;
+}
+
+.navbar {
+  background: rgb(222, 250, 193) !important;
+}
+.dash{ 
+  background: rgb(222, 250, 193) !important;
+}
+
+
+.nav-link {
+  color: rgb(0, 0, 0) !important;
+}
+
+.masthead {
+  color: rgb(255, 255, 255);
+  min-height: 30rem;
+  width: 100%;
+  height: 100%;
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+  background: url('https://blog.cobiscorp.com/hs-fs/hubfs/covid%2019%20bancos.jpg?width=641&name=covid%2019%20bancos.jpg');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.masthead h1 {
+  font-size: 4rem;
+  margin: 0;
+  padding: 0;
+}
+
+@media (min-width: 992px) {
+  .masthead {
+    height: 100vh;
+  }
+  .masthead h1 {
+    font-size: 5.5rem;
+  }
+}

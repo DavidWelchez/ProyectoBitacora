@@ -5,7 +5,9 @@ const pool = require('../database');
 const { isLoggedIn } = require('../lib/auth');
 
 router.get('/add', isLoggedIn,(req, res) => {
-    res.render('empleado/add');
+    res.render('empleado/add',{
+        layout: "dashboard"
+    });
 });
 
 router.post('/add', async (req, res) => {
@@ -21,7 +23,10 @@ router.post('/add', async (req, res) => {
 
 router.get('/', isLoggedIn, async (req, res) => {
     const empleados = await pool.query('SELECT * FROM empleados');
-    res.render('empleado/list', { empleados });
+    res.render('empleado/list', { 
+        layout: "dashboard",
+        empleados 
+    });
 });
 
 router.get('/delete/:id', async (req, res) => {
@@ -35,7 +40,10 @@ router.get('/edit/:id', isLoggedIn,async (req, res) => {
     const { id } = req.params;
     const empleados = await pool.query('SELECT * FROM empleados WHERE id = ?', [id]);
   
-    res.render('empleado/edit', {empleado: empleados[0]});
+    res.render('empleado/edit', {
+        layout: "dashboard",
+        
+        empleado: empleados[0]});
 });
 
 router.post('/edit/:id', async (req, res) => {
