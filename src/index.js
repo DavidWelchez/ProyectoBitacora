@@ -32,7 +32,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 app.use(session({
-  secret: 'faztmysqlnodemysql',
+  secret: 'mysqlnodemysql',
   resave: false,
   saveUninitialized: false,
   store: new MySQLStore(database)
@@ -53,7 +53,7 @@ app.use((req, res, next) => {
 // Routes
 app.use(require('./routes/index'));
 app.use(require('./routes/authentication'));
-app.use('/empleado', require('./routes/empleado'));
+app.use('/eventoRiesgo', require('./routes/eventoRiesgo'));
 app.use('/dashboard', require('./routes/dashboard'));
 
 
