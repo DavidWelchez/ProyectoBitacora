@@ -2,11 +2,32 @@ const express = require('express');
 const router = express.Router();
 
 const pool = require('../database');
-const { isLoggedIn } = require('../lib/auth');
+const { isLoggedIn ,} = require('../lib/auth'); 
+const { roles ,} = require('../lib/rol'); 
 
-router.get('/add', isLoggedIn,(req, res) => {
+
+//const { roles } = require('../lib/auth');      
+
+
+
+router.get('/add', isLoggedIn,roles,(req, res) => {
+
+    var loginAdmin = false;
+    var loginGeneral = false;
+
+    rol = req.user.rolId;
+    if(rol == "1") {
+        loginAdmin = true;
+        }
+        if(rol == "2") {
+            loginGeneral = true;
+            }
+            
+
     res.render('eventoRiesgo/add',{
-        layout: "dashboard"
+        layout: "dashboard",
+        loginAdmin
+
     });
 });
 
@@ -22,9 +43,22 @@ router.post('/add', async (req, res) => {
 });
 
 router.get('/', isLoggedIn, async (req, res) => {
+    var loginAdmin = false;
+    var loginGeneral = false;
+
+    rol = req.user.rolId;
+    if(rol == "1") {
+        loginAdmin = true;
+        }
+        if(rol == "2") {
+            loginGeneral = true;
+            }
     const eventoRiesgos = await pool.query('SELECT * FROM eventoRiesgos');
     res.render('eventoRiesgo/list', { 
+        
         layout: "dashboard",
+        loginAdmin,
+        loginGeneral,
         eventoRiesgos 
     });
 });

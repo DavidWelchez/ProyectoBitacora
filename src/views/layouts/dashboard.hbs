@@ -16,11 +16,157 @@
   <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-     {{>navigation}}
-        {{>dashboard}}   
+ {{>navigation}}
  {{>message}} 
+<div class="area"></div>
+      <nav class="main-menu dash">
+            <ul>
+              
+                
+                  
+                {{#if loginAdmin}}
+                 <li>
+                    <a href="/profile">
+                        <i class="fa fa-home fa-2x"></i>
+                        <span class="nav-text">
+                            Inicio
+                        </span>
+                    </a>
+                  
+                </li>
+                  <li class="has-subnav">
+                    <a href="/eventoRiesgo">
+                       <i class="fa fa-list fa-2x"></i>
+                        <span class="nav-text">
+                            Tablas
+                        </span>
+                    </a>
+                    
+                </li>
+                 <li>
+                    <a href="#">
+                       <i class="fa fa-info fa-2x"></i>
+                        <span class="nav-text">
+                            Bitacora
+                        </span>
+                    </a>
+                </li>
+                <li class="has-subnav">
+                    <a href="/profile">
+                        <i class="fa fa-laptop fa-2x"></i>
+                        <span class="nav-text">
+                            Usuarios
+                        </span>
+                    </a>
+                    
+                </li>
+                <li class="has-subnav">
+                    <a href="#">
+                       <i class="fa fa-list fa-2x"></i>
+                        <span class="nav-text">
+                            Provedores
+                        </span>
+                    </a>
+                    
+                </li>
+                <li class="has-subnav">
+                    <a href="#">
+                       <i class="fa fa-folder-open fa-2x"></i>
+                        <span class="nav-text">
+                           Tipos de riesgo
+                        </span>
+                    </a>
+                   
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-font fa-2x"></i>
+                        <span class="nav-text">
+                           Eventos
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-bar-chart-o fa-2x"></i>
+                        <span class="nav-text">
+                           Incidentes
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-font fa-2x"></i>
+                        <span class="nav-text">
+                           Plataformas
+                        </span>
+                    </a>
+                </li>
+                <li>
+                   <a href="#">
+                       <i class="fa fa-table fa-2x"></i>
+                        <span class="nav-text">
+                            
+                            Eventos de riesgo
+                        </span>
+                    </a>
+                </li>
+                <li>
+                   <a href="#">
+                        <i class="fa fa-map-marker fa-2x"></i>
+                        <span class="nav-text">
+                            Factor de riesgo
+                        </span>
+                    </a>
+                </li>
+               
+            </ul>
 
-    {{{body}}}
+            <ul class="logout">
+                <li>
+                   <a href="/logout">
+                         <i class="fa fa-power-off fa-2x"></i>
+                        <span class="nav-text">
+                            Cerrar sesion
+                        </span>
+                    </a>
+                </li>  
+{{else}}
+<li>
+                    <a href="/profile">
+                        <i class="fa fa-home fa-2x"></i>
+                        <span class="nav-text">
+                            Inicio
+                        </span>
+                    </a>
+                  
+                </li>
+                  <li class="has-subnav">
+                    <a href="/eventoRiesgo">
+                       <i class="fa fa-list fa-2x"></i>
+                        <span class="nav-text">
+                            Tablas
+                        </span>
+                    </a>
+                    
+                </li>
+                 <li>
+                    <a href="#">
+                       <i class="fa fa-info fa-2x"></i>
+                        <span class="nav-text">
+                            Bitacora
+                        </span>
+                    </a>
+                </li>
+
+
+                {{/if}}
+
+
+            </ul>
+        </nav>
+ 
+ {{{body}}}
 
 
     {{!-- SCRIPTS --}}
