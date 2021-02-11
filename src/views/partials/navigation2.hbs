@@ -1,8 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
-    <a class="navbar-brand" href="/">
-       <img src="/css/img/logo2.png" alt="Logo Fazt" class="card-img-top mx-auto m-2  w-50">
-    </a>
+    
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
       aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -10,12 +8,14 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-auto">
         {{#if user}}
-       
-        
-        <li class="nav-item">
+       <li class="nav-item">
           
-          <a class="nav-link " href="/logout">Cerrar Sesion</a>
+          <a class="navbar-brand" href="/">
+       <img src="/css/img/logo2.png" alt="Logo Fazt" class="card-img-top mx-auto m-2  w-50">
+    </a>
         </li>
+        
+       
         {{else}}
         <li class="nav-item">
           <a class="nav-link" href="/signin">Iniciar Sesion</a>

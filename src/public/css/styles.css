@@ -51,7 +51,7 @@ position:relative;
 display:table;
 border-collapse:collapse;
 border-spacing:0;
-color:#999;
+color:rgb(35, 148, 0);
  font-family: arial;
 font-size: 14px;
 text-decoration:none;
@@ -180,4 +180,45 @@ font-family: 'Oswald', sans-serif;
   .masthead h1 {
     font-size: 5.5rem;
   }
+}
+#scroll{
+
+  width: 768px;
+  height: 600px;
+  max-width: 100%;
+  min-height: 300px;
+  overflow-y:scroll;
+  overflow-x:hidden;
+}
+
+
+#table-wrapper {
+  position:relative;
+}
+#table-scroll {
+  height:300px;
+  overflow:auto;  
+  margin-top:20px;
+}
+#table-wrapper table {
+  width:100%;
+
+}
+
+#table-wrapper table thead th .text {
+  position:absolute;   
+  top:-20px;
+  z-index:2;
+  height:20px;
+  width:35%;
+  border:1px solid red;
+}
+
+
+.btn2{
+  padding-top: 1px;
+  padding-bottom: 1px;
+  background-color: rgb(222, 250, 193);
+  border-color:  rgb(35, 148, 0);
+  color: rgb(35, 148, 0);
 }
