@@ -1,0 +1,72 @@
+
+
+
+<div class="container" > 
+    <h1 class="text-center">TIPO DE INCIDENTES </h1>
+    <div  style="padding-left: 20%;" > 
+    
+
+      <h3 style="padding-left: 60%;"><a class="btn btn-success btn2" href="/incidente/add"><i class="fa fa-plus"> Crear Nuevo</i> 
+                                    </a>
+                              </h3>
+    <div id="scroll" class="overflow-auto overflow-hidden">
+        <div id="table-wrapper">
+  <div id="table-scroll">
+        <div class="containerlist" style="overflow-x:auto;">
+            <div class="row">
+                <div class="col-sm-11">
+                    <div class="row">
+                        <br>
+
+                        <div class="col-10 col-sm-11" id="panel-servicios">
+
+                          
+
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Tipo de incidente</th>
+                                        
+                                    </tr>
+                                </thead>
+                                {{#each incidente}}
+                                <tr>
+                                    <td>{{incidente}}</td>
+                                     <td>
+                                        <a class="btn btn-danger" href="/incidente/delete/{{id}}">
+                        Eliminar
+                    </a>
+                    
+                                       <a class="btn btn-secondary" href="/incidente/edit/{{id}}">
+                        Editar
+                    </a>
+                                    </td>
+                                    
+                                    
+
+                                </tr>
+                                {{else}}
+     <th></th>  
+     <th>Aún no se han agregado datos.</th>
+    </tr>
+    {{/each}}
+                            </table>
+                        </div>
+
+                       
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+
+</div>
+ </div>
+
+
+</div>
+</div>

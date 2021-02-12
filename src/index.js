@@ -55,6 +55,8 @@ app.use(require('./routes/index'));
 app.use(require('./routes/authentication'));
 app.use('/eventoRiesgo', require('./routes/eventoRiesgo'));
 app.use('/factorRiesgo', require('./routes/factorRiesgo'));
+app.use('/incidente', require('./routes/incidente'));
+
 
 app.use('/dashboard', require('./routes/dashboard'));
 
