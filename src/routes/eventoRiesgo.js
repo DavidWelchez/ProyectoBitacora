@@ -70,7 +70,7 @@ router.get('/delete/:id', async (req, res) => {
     res.redirect('/eventoRiesgo');
 });
 
-router.get('/edit/:id', isLoggedIn,async (req, res) => {
+router.get('/edit/:id', isLoggedIn,roles,async (req, res) => {
     const { id } = req.params;
     const EventoRiesgo = await pool.query('SELECT * FROM eventoRiesgos WHERE id = ?', [id]);
   

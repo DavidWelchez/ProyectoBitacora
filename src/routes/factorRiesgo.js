@@ -47,7 +47,7 @@ router.post('/add/', async (req, res) => {
     res.redirect('/factorRiesgo');
 });
 
-router.get('/', isLoggedIn, async (req, res) => {
+router.get('/', isLoggedIn,roles, async (req, res) => {
     var loginAdmin = false;
     var loginGeneral = false;
 
@@ -75,7 +75,7 @@ router.get('/delete/:id', async (req, res) => {
     res.redirect('/factorRiesgo');
 });
 
-router.get('/edit/:id', isLoggedIn,async (req, res) => {
+router.get('/edit/:id', isLoggedIn,roles,async (req, res) => {
     const { id } = req.params;
     const eventoRiesgos = await pool.query('SELECT * FROM eventoRiesgos ');
     const factor = await pool.query('SELECT * FROM factorRiesgos WHERE id = ?', [id]);
