@@ -24,7 +24,7 @@ router.get('/add', isLoggedIn,roles,(req, res) => {
             }
             
 
-    res.render('incidente/add',{
+    res.render('evento/add',{
         layout: "dashboard",
         loginAdmin
 
@@ -32,14 +32,14 @@ router.get('/add', isLoggedIn,roles,(req, res) => {
 });
 
 router.post('/add', async (req, res) => {
-    const { incidente } = req.body;
-    const newincidente= {
-        incidente
+    const { evento } = req.body;
+    const newevento= {
+        evento
         
     };
-    await pool.query('INSERT INTO incidentes set ?', [newincidente]);
-    req.flash('success', 'Incidente  guardado ');
-    res.redirect('/incidente');
+    await pool.query('INSERT INTO eventos set ?', [newevento]);
+    req.flash('success', 'Evento  guardado ');
+    res.redirect('/evento');
 });
 
 router.get('/', isLoggedIn, roles,async (req, res) => {
@@ -53,43 +53,43 @@ router.get('/', isLoggedIn, roles,async (req, res) => {
         if(rol == "2") {
             loginGeneral = true;
             }
-    const incidente = await pool.query('SELECT * FROM incidentes');
-    res.render('incidente/list', { 
+    const evento = await pool.query('SELECT * FROM eventos');
+    res.render('evento/list', { 
         
         layout: "dashboard",
         loginAdmin,
         loginGeneral,
-        incidente 
+        evento 
     });
 });
 
-router.get('/delete/:id', isLoggedIn,roles,async (req, res) => {
+router.get('/delete/:id', async (req, res) => {
     const { id } = req.params;
-    await pool.query('DELETE FROM incidentes WHERE ID = ?', [id]);
-    req.flash('success', 'incidente eliminado');
-    res.redirect('/incidente');
+    await pool.query('DELETE FROM eventos WHERE ID = ?', [id]);
+    req.flash('success', 'Evento eliminado');
+    res.redirect('/evento');
 });
 
 router.get('/edit/:id', isLoggedIn,roles,async (req, res) => {
     const { id } = req.params;
-    const incidente = await pool.query('SELECT * FROM incidentes WHERE id = ?', [id]);
+    const evento = await pool.query('SELECT * FROM eventos WHERE id = ?', [id]);
   
-    res.render('incidente/edit', {
+    res.render('evento/edit', {
         layout: "dashboard",
         
-        incidente: incidente[0]});
+        evento: evento[0]});
 });
 
 router.post('/edit/:id', async (req, res) => {
     const { id } = req.params;
-    const { incidente } = req.body;
-    const newincidente = {
-        incidente
+    const { evento } = req.body;
+    const newevento = {
+        evento
         
     };
-    await pool.query('UPDATE incidentes set ? WHERE id = ?', [newincidente, id]);
-    req.flash('success', 'incidente actualizado');
-    res.redirect('/incidente');
+    await pool.query('UPDATE eventos set ? WHERE id = ?', [newevento, id]);
+    req.flash('success', 'Evento actualizado');
+    res.redirect('/evento');
 });
 
 module.exports = router;

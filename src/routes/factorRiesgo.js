@@ -68,7 +68,7 @@ router.get('/', isLoggedIn,roles, async (req, res) => {
     });
 });
 
-router.get('/delete/:id', async (req, res) => {
+router.get('/delete/:id',isLoggedIn,roles, async (req, res) => {
     const { id } = req.params;
     await pool.query('DELETE FROM factorRiesgos WHERE ID = ?', [id]);
     req.flash('success', 'Factor de  Riesgo eliminado');

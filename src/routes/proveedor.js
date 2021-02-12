@@ -42,7 +42,7 @@ router.post('/add', async (req, res) => {
     res.redirect('/proveedor');
 });
 
-router.get('/', isLoggedIn, async (req, res) => {
+router.get('/', isLoggedIn,roles, async (req, res) => {
     var loginAdmin = false;
     var loginGeneral = false;
 

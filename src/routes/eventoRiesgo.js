@@ -63,7 +63,7 @@ router.get('/', isLoggedIn, async (req, res) => {
     });
 });
 
-router.get('/delete/:id', async (req, res) => {
+router.get('/delete/:id', isLoggedIn,roles,async (req, res) => {
     const { id } = req.params;
     await pool.query('DELETE FROM eventoRiesgos WHERE ID = ?', [id]);
     req.flash('success', 'Evento Riesgo eliminado');

@@ -57,6 +57,8 @@ app.use('/eventoRiesgo', require('./routes/eventoRiesgo'));
 app.use('/factorRiesgo', require('./routes/factorRiesgo'));
 app.use('/incidente', require('./routes/incidente'));
 app.use('/proveedor', require('./routes/proveedor'));
+app.use('/evento', require('./routes/evento'));
+
 
 
 
