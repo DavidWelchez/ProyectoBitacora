@@ -11,11 +11,19 @@
       <ul class="navbar-nav ml-auto">
         {{#if user}}
        
-        
-        <li class="nav-item">
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{user.fullname}}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/logout">Cerrar session</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Cambiar contrasena</a>
+          <div class="dropdown-divider"></div>
           
-          <a class="nav-link " href="/logout">Cerrar Sesion</a>
-        </li>
+        </div>
+      </li>
+
         {{else}}
         <li class="nav-item">
           <a class="nav-link" href="/signin">Iniciar Sesion</a>

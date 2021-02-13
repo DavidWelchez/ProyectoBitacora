@@ -1,0 +1,111 @@
+<div class="container" > 
+    <h1 class="text-center">USUARIOS</h1>
+    <div  style="padding-left: 20%;" > 
+    
+
+      <h3 style="padding-left: 60%;"><a class="btn btn-success btn2" href="/signup/"><i class="fa fa-plus"> Crear Nuevo</i> 
+                                    </a>
+                              </h3>
+    <div id="scroll" class="overflow-auto overflow-hidden">
+        <div id="table-wrapper">
+  <div id="table-scroll">
+        <div class="containerlist" style="overflow-x:auto;">
+            <div class="row">
+                <div class="col-sm-11">
+                    <div class="row">
+                        <br>
+
+                        <div class="col-10 col-sm-11" id="panel-servicios">
+
+                          
+
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Nombre completo</th>
+                                         <th>Usuario</th>
+                                         <th>Rol</th>
+                                          <th>email</th>
+
+                                        
+                                    </tr>
+                                </thead>
+                                {{#each usuario }}
+                                <tr>
+                                <td>{{fullname}}</td>
+                                <td>{{username}}</td>
+                                <td>{{rol}}</td>
+                                <td>{{email}}</td>
+
+
+
+
+                                     <td>
+                                        <a class="btn btn-danger" href="/usuario/delete/{{id}}">
+                        Eliminar
+                    </a>
+                     </td>
+                      <td>
+                                       <a class="btn btn-secondary" href="/usuario/edit/{{id}}">
+                        Editar
+                    </a>
+                                    </td>
+                                                  <td>
+                                        <a class="btn btn-danger" href="/usuario/editpass/{{id}}">
+                        Cambiar contraseña
+                    </a>
+                     </td>
+                                    
+                                    
+
+                                </tr>
+                                {{else}}
+     <th></th>  
+     <th>Aún no se han agregado datos.</th>
+    </tr>
+    {{/each}}
+                            </table>
+                        </div>
+
+                        {{!-- <div class="col-2 col-sm-1">
+                            <h3> <br><br> </h3>
+                            <br><br>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+
+                                    </tr>
+                                </thead>
+                                {{!-- {{#each servicios}}
+                                <tr>
+
+                                    <td style="border-color: #FFFFFF; height: 145px;">
+
+                                        <a href="/modificar-servicio/{{this.url}}"><i class="fa fa-pencil fa-lg"
+                                                style="color: #F88600;  " aria-hidden="true">
+
+                                            </i></a>
+
+                                    </td>
+                                </tr>
+                                {{/each}} --}}
+{{!-- 
+                            </table>
+                        </div> --}}
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+
+</div>
+ </div>
+
+
+</div>
+</div>
+

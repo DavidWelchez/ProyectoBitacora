@@ -10,6 +10,9 @@ const MySQLStore = require('express-mysql-session')(session);
 const bodyParser = require('body-parser');
 const { database } = require('./keys');
 
+const pool = require('./database');
+const helpers = require('./lib/helpers');
+
 // Intializations
 const app = express();
 require('./lib/passport');
@@ -58,6 +61,8 @@ app.use('/factorRiesgo', require('./routes/factorRiesgo'));
 app.use('/incidente', require('./routes/incidente'));
 app.use('/proveedor', require('./routes/proveedor'));
 app.use('/evento', require('./routes/evento'));
+app.use('/usuario', require('./routes/usuario'));
+
 
 
 
@@ -72,3 +77,36 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.listen(app.get('port'), () => {
   console.log('Server is in port', app.get('port'));
 });
+
+
+radmin = async ()=>{
+  const roladmin = await pool.query('SELECT * FROM users WHERE rol="Admin"');
+
+  if (roladmin[0]==null){
+    const fullname= 'Admin';
+    const username='Admin';
+    const password="Admin123";
+    const rol='Admin';
+    const email="Admin@gmail.com"
+  
+    let newUser = {
+      fullname,
+      username,
+      password,
+      rol,
+      email
+      
+    };
+    newUser.password = await helpers.encryptPassword(password);
+    // Saving in the Database
+    const result = await pool.query('INSERT INTO users SET ? ', newUser);
+  
+  }
+  
+
+}
+
+
+radmin();
+
+// pool.query('INSERT INTO rols (rol) values ("admin2")');

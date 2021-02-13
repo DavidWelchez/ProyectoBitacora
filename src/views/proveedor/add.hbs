@@ -9,9 +9,17 @@
             <div class="card">
                 <div class="card-body">
                     <form action="/proveedor/add" method="POST">
-                        <div class="form-group">
+
+                    <div class="form-group">
+    <label for="proveedor" class="form-label">Proveedor</label>
+    <input type="text" class="form-control" name="proveedor" id="proveedor" required>
+    <div class="invalid-tooltip">
+      Please ingrese un proveedor.
+    </div>
+      </div>
+                        {{!-- <div class="form-group">
                             <input type="text" name="proveedor" class="form-control" placeholder="Proveedor" autofocus>
-                        </div>
+                        </div> --}}
                         
                         
                         <div class="form-group">

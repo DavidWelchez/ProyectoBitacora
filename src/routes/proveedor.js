@@ -15,14 +15,13 @@ router.get('/add', isLoggedIn,roles,(req, res) => {
     var loginAdmin = false;
     var loginGeneral = false;
 
-    rol = req.user.rolId;
-    if(rol == "1") {
+    rol = req.user.rol;
+    if(rol == "Admin") {
         loginAdmin = true;
         }
-        if(rol == "2") {
+        if(rol == "General") {
             loginGeneral = true;
             }
-            
 
     res.render('proveedor/add',{
         layout: "dashboard",
@@ -46,11 +45,11 @@ router.get('/', isLoggedIn,roles, async (req, res) => {
     var loginAdmin = false;
     var loginGeneral = false;
 
-    rol = req.user.rolId;
-    if(rol == "1") {
+    rol = req.user.rol;
+    if(rol == "Admin") {
         loginAdmin = true;
         }
-        if(rol == "2") {
+        if(rol == "General") {
             loginGeneral = true;
             }
     const proveedor = await pool.query('SELECT * FROM proveedors');

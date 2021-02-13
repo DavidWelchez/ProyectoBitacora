@@ -14,12 +14,11 @@ router.get('/add', isLoggedIn,roles,async (req, res) => {
 
     var loginAdmin = false;
     var loginGeneral = false;
-
-    rol = req.user.rolId;
-    if(rol == "1") {
+    rol = req.user.rol;
+    if(rol == "Admin") {
         loginAdmin = true;
         }
-        if(rol == "2") {
+        if(rol == "General") {
             loginGeneral = true;
             }
             const eventoRiesgos = await pool.query('SELECT * FROM eventoRiesgos ');
@@ -51,11 +50,11 @@ router.get('/', isLoggedIn,roles, async (req, res) => {
     var loginAdmin = false;
     var loginGeneral = false;
 
-    rol = req.user.rolId;
-    if(rol == "1") {
+    rol = req.user.rol;
+    if(rol == "Admin") {
         loginAdmin = true;
         }
-        if(rol == "2") {
+        if(rol == "General") {
             loginGeneral = true;
             }
     const factorRiesgos = await pool.query('SELECT factorRiesgos.id, factorRiesgos.factor, eventoRiesgos.EventoRiesgo FROM factorRiesgos, eventoRiesgos where factorRiesgos.eventoRiesgoId=eventoRiesgos.id');
