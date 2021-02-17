@@ -222,3 +222,11 @@ font-family: 'Oswald', sans-serif;
   border-color:  rgb(35, 148, 0);
   color: rgb(35, 148, 0);
 }
+
+.btn3{
+  padding-top: 5px;
+  padding-bottom: 3px;
+  background-color: rgb(222, 250, 193);
+  border-color:  rgb(35, 148, 0);
+  color: rgb(35, 148, 0);
+}
