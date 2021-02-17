@@ -1,0 +1,35 @@
+<h1 class="text-center">Plataforma </h1>
+
+
+
+<div class="container p-4">
+    <div class="row">
+        <div class="col-md-4 mx-auto">
+
+            <div class="card">
+                <div class="card-body">
+                    <form action="/plataforma/add" method="POST">
+                        <div class="form-group">
+                            <input type="text" name="plataforma" class="form-control" placeholder="Plataforma" autofocus>
+                        </div>
+                          <div class="form-group"></div>
+
+                        <select class ="form-control" name="incidenteId" id="id" required>
+						<option > Selecciona un tipo de incidente </option>
+						{{#each incidentes }}
+                                  <option value="{{id}}" name="id"> {{incidente}}</option>
+                         {{/each}}
+					    </select>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-success btn-block">
+                                Guardar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
