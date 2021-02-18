@@ -1,0 +1,111 @@
+<div class="container" > 
+    <h1 class="text-center">BITACORA</h1>
+    <div  style="padding-left: 10%;" > 
+    
+ <div class="row">                
+        <div class="col"> 
+             <a class="btn btn-success btn2 "  href="/bitacora/add"><i class="fa fa-plus"> Crear Nuevo</i>  </a>
+        </div>
+                <div class="col" style="padding-left: 5%;">
+                 <form action="/usuario/buscar" method="POST">
+                  <input class="" type="text" name="fullname" placeholder="Buscar" id="fullname" >
+                  <button class="btn btn-success btn3">Buscar</button>
+                 </form> 
+                </div>
+      </div>
+
+   
+    <div id="" class="overflow-auto overflow-hidden">
+        <div id="table-wrapper"></div>
+  <div id="table-scroll">
+        
+                    <div class="row" >
+                        <br>
+
+                        <div class="col-12 col-sm-11" id="">
+
+                          
+
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col"> Fecha de incidencia</th>
+                                         <th scope="col"> Hora de incidencia</th>
+                                          <th scope="col">Tipo de incidente</th>
+                                           <th scope="col">Tipo de plataforma</th>
+                                           <th scope="col">Tipo de evento</th>
+                                           <th scope="col">Descripcion</th>
+                                           <th scope="col">Empleado reporto</th>
+                                           <th scope="col">Empleado atendio</th>
+                                           <th scope="col">Proveedor</th>
+                                           <th scope="col">Fecha de solucion</th>
+                                           <th scope="col">Hora de solucion</th>
+                                           <th scope="col">Estado</th>
+                                           <th scope="col">Evento de riesgo</th>
+                                           <th scope="col">Factor d riesgo</th>
+
+                                        
+                                    </tr>
+                                </thead>
+                                {{#each bitacora }}
+                                <tr>
+
+                                <td>{{fechaDeIncidencia}}</td>
+                                <td>{{horaDeIncidencia}}</td>
+                                <td>{{incidente}}</td>
+                                <td>{{plataforma}}</td>
+                                <td>{{evento}}</td>
+                                <td>{{descripcion}}</td>
+                                <td>{{fullname}}</td>
+                                <td>{{atendio}}</td>
+                                <td>{{proveedor}}</td>
+                                <td>{{fechaSolucion}}</td>
+                                <td>{{horaSolucion}}</td>
+                                <td>{{estado}}</td>
+                                 <td>{{EventoRiesgo}}</td>
+                                  <td>{{factor}}</td>
+
+
+
+
+                                     <td>
+                                        <a class="btn btn-danger" href="/plataforma/delete/{{id}}">
+                                       Eliminar
+                                        </a>
+                                      </td>
+
+                                      <td>
+                                       <a class="btn btn-secondary" href="/plataforma/edit/{{id}}">
+                                       Editar
+                                       </a>
+                                    </td>
+                                    
+                                    
+
+                                </tr>
+                                {{else}}
+     <th></th>  
+     <th>Aún no se han agregado datos.</th>
+    </tr>
+    {{/each}}
+                            </table>
+                        </div>
+
+                        
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+
+</div>
+ </div>
+
+
+</div>
+</div>
+

@@ -1,0 +1,156 @@
+<h1 class="text-center">Bitacora </h1>
+
+
+
+<div class="container p-4">
+    <div class="row">
+        <div class="col-md-10 mx-auto">
+           <div class="card">
+                <div class="card-body">
+
+                    <form action="/bitacora/add" method="POST">
+
+                    <div class="form-row"> 
+                            <div class="form-group col-md-3">
+                             <label for="validationServer03">Fecha de incidencia</label>
+                             <input type="date" class="form-control" name="fechaDeIncidencia" placeholder="Fecha de incidencia" autofocus required>
+                             <div class="invalid-tooltip">
+                             Por favor ingrese la fecha.
+                             </div>
+                            </div>
+                           
+                           <div class="form-group col-md-3">
+                           <label for="validationServer03">Hora  incidencia</label>
+                           <input type="time" class="form-control" name="horaDeIncidencia" placeholder="Hora de incidencia" required>
+                           <div class="invalid-tooltip">
+                            Por favor ingrese la fecha.
+                        </div>
+                        </div>
+
+                        <div class="form-group col-md-3"> 
+                        <label for="validationServer03">Plataforma</label>
+                        <select class ="form-control custom-select is-invalid" name="plataformaId" id="id" aria-describedby="validationServer04Feedback" required>
+						 <option selected disabled value="">Plataformas</option>
+						{{#each plataformas }}
+                                  <option value="{{id}}" name="id"> {{plataforma}}</option>
+                         {{/each}}
+					    </select>
+                        </div>   
+
+                        <div class="form-group col-md-3"> 
+                        <label for="validationServer03">Evento</label>
+                        <select class ="form-control custom-select is-invalid" name="eventoId" id="id" aria-describedby="validationServer04Feedback" required>
+						 <option selected disabled value="">Evento</option>
+						{{#each eventos }}
+                                  <option value="{{id}}" name="id"> {{evento}}</option>
+                         {{/each}}
+					    </select>
+                        </div> 
+
+                    </div>
+
+                    <div class="form-row">
+
+                             <div class="form-group col-md-3">
+                             <label for="validationServer03">Describa la incidencia</label>
+                             <textarea class="form-control" name="descripcion" placeholder="Describa la incidencia" rows="2" required></textarea>
+                             <div class="invalid-tooltip">
+                             Por favor ingrese la fecha.
+                             </div>
+                            </div>
+
+                             <div class="form-group col-md-3"> 
+                        <label for="validationServer03">Empleado reporto</label>
+                        <select class ="form-control custom-select is-invalid" name="userId" id="id" aria-describedby="validationServer04Feedback" required>
+						 <option selected disabled value="">Empleado reporto</option>
+						{{#each usuarios }}
+                                  <option value="{{id}}" name="id"> {{fullname}}</option>
+                         {{/each}}
+					    </select>
+                        </div> 
+
+                         <div class="form-group col-md-3"> 
+                        <label for="validationServer03">Empleado atendio</label>
+                        <select class ="form-control custom-select is-invalid" name="atendioid" id="id" aria-describedby="validationServer04Feedback" required>
+						 <option selected disabled value="">Empleado atendio</option>
+						{{#each usuarios }}
+                                  <option value="{{id}}" name="id"> {{fullname}}</option>
+                         {{/each}}
+					    </select>
+                        </div> 
+
+                        <div class="form-group col-md-3"> 
+                        <label for="validationServer03">Proveedor</label>
+                        <select class ="form-control custom-select is-invalid" name="proveedorId" id="id" aria-describedby="validationServer04Feedback" required>
+						 <option selected disabled value="">Proveedor</option>
+						{{#each proveedores }}
+                                  <option value="{{id}}" name="id"> {{proveedor}}</option>
+                         {{/each}}
+					    </select>
+                        </div> 
+
+                       
+
+                    </div>  
+                    <div class="form-row">
+
+                         <div class="form-group col-md-3">
+                             <label for="validationServer03">Fecha de solucion</label>
+                             <input type="date" class="form-control" name="fechaSolucion" placeholder="Fecha solucion"  required>
+                             <div class="invalid-tooltip">
+                             Por favor ingrese la fecha.
+                             </div>
+                            </div>
+
+                        <div class="form-group col-md-3">
+                           <label for="validationServer03">Hora  solucion</label>
+                           <input type="time" class="form-control" name="horaSolucion" placeholder="Hora de solucion" required>
+                           <div class="invalid-tooltip">
+                            Por favor ingrese la fecha.
+                        </div>
+                        </div>
+
+                        <div class="form-group col-md-3"> 
+                        <label for="validationServer03">Estado</label>
+                        <select class ="form-control custom-select is-invalid" name="estado" id="id" aria-describedby="validationServer04Feedback" required>
+						 <option selected disabled value="">Estados</option>
+						
+                                  <option value="En espera" name="id">En espera </option>
+                                  <option value="En proceso" name="id">En proceso </option>
+                                  <option value="Completado" name="id">Completado </option>
+                         
+					    </select>
+                        </div> 
+
+                         <div class="form-group col-md-3"> 
+                        <label for="validationServer03">Factor de riesgo</label>
+                        <select class ="form-control custom-select is-invalid" name="factorRiesgoId" id="id" aria-describedby="validationServer04Feedback" required>
+						 <option selected disabled value="">Factor de riesgo</option>
+						{{#each factorRiesgos }}
+                                  <option value="{{id}}" name="id"> {{factor}}</option>
+                         {{/each}}
+					    </select>
+                        </div> 
+
+
+                    </div>
+
+
+                                  
+
+
+
+                        <div class="form-group" style="padding-left: 90%;">
+                            <button class="btn btn-success ">
+                                Guardar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+    </div>
+            
+        </div>
+
+    </div>
+</div>
