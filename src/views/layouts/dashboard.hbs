@@ -20,11 +20,23 @@
  {{>message}} 
 <div class="area"></div>
       <nav class="main-menu dash">
-            <ul>
+            
               
                 
                   
                 {{#if loginAdmin}}
+                <ul>
+                    <li class="has-subnav">
+                    <a href="#">
+                       <i class="fa fa-list fa-2x"></i>
+                        <span class="nav-text">
+                           
+                        </span>
+                    </a>
+                    
+                </li>
+                <br>
+                <br>
                  <li>
                     <a href="/profile">
                         <i class="fa fa-home fa-2x"></i>
@@ -34,26 +46,20 @@
                     </a>
                   
                 </li>
-                  <li class="has-subnav">
-                    <a href="/eventoRiesgo">
-                       <i class="fa fa-list fa-2x"></i>
-                        <span class="nav-text">
-                            Tablas
-                        </span>
-                    </a>
-                    
-                </li>
+                  
                  <li>
                     <a href="#/bitacora">
-                       <i class="fa fa-info fa-2x"></i>
+                    <i class="fa fa-table fa-2x"></i>
+                       
                         <span class="nav-text">
                             Bitacora
                         </span>
                     </a>
                 </li>
                 <li class="has-subnav">
-                    <a href="/usuario">
-                        <i class="fa fa-laptop fa-2x"></i>
+                    <a href="/usuario">               
+                    <i class="fa fa-address-book-o"></i>
+
                         <span class="nav-text">
                             Usuarios
                         </span>
@@ -96,7 +102,7 @@
                 </li>
                 <li>
                    <a href="/eventoRiesgo">
-                       <i class="fa fa-table fa-2x"></i>
+                       <i class="fa fa-info fa-2x"></i>
                         <span class="nav-text">
                             
                             Eventos de riesgo
@@ -123,7 +129,20 @@
                         </span>
                     </a>
                 </li>  
+                </ul>
 {{else}}
+<ul>
+    <li class="has-subnav">
+                    <a href="#">
+                       <i class="fa fa-list fa-2x"></i>
+                        <span class="nav-text">
+                           
+                        </span>
+                    </a>
+                    
+                </li>
+                <br>
+                <br>
 <li>
                     <a href="/profile">
                         <i class="fa fa-home fa-2x"></i>
@@ -133,15 +152,7 @@
                     </a>
                   
                 </li>
-                  <li class="has-subnav">
-                    <a href="/eventoRiesgo">
-                       <i class="fa fa-list fa-2x"></i>
-                        <span class="nav-text">
-                            Tablas
-                        </span>
-                    </a>
-                    
-                </li>
+               
                  <li>
                     <a href="#">
                        <i class="fa fa-info fa-2x"></i>
@@ -153,19 +164,22 @@
 
   <li>
       
+
+ </ul>
+ <ul class="logout">
+                <li>
                    <a href="/logout">
                          <i class="fa fa-power-off fa-2x"></i>
                         <span class="nav-text">
                             Cerrar sesion
                         </span>
                     </a>
-                </li> 
-
-
+                </li>  
+                </ul>
                 {{/if}}
 
 
-            </ul>
+           
         </nav>
  
  {{{body}}}

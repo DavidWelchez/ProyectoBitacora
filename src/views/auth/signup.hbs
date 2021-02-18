@@ -7,9 +7,15 @@
         </div>
         <div class="card-body">
           <form action="/signup" method="POST">
+          
+            
             <div class="form-group">
-              <input type="type" name="fullname" placeholder="Nombre completo" class="form-control" autofocus>
-            </div>
+             <input type="text" class="form-control" name="fullname" placeholder="Nombre Completo" autofocus required>
+              <div class="invalid-tooltip">
+                 Por favor ingrese un el nombre.
+             </div>
+             
+           </div>
             <div class="form-group">
               <input type="text" name="username" placeholder="Usuario" class="form-control">
             </div>

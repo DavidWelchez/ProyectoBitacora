@@ -13,10 +13,10 @@
                             <input type="text"  name="factor" class="form-control" placeholder="Factor de Riesgo "  value="{{factor.factor}}" autofocus>
                         </div>
                          <div class="form-group">
-                        <select class ="form-control" name="eventoRiesgoId" id="id" required>
-					
+                        <select class ="form-control custom-select is-invalid" name="eventoRiesgoId" id="id" aria-describedby="validationServer04Feedback" required>
+						 <option selected disabled value="">Eventos de riesgo</option>
 						{{#each eventoRiesgos }}
-                                  <option value="{{id}}"  name="id"> {{EventoRiesgo}}</option>
+                                  <option value="{{id}}" name="id"> {{EventoRiesgo}}</option>
                          {{/each}}
 					    </select>
                         </div>

@@ -14,8 +14,10 @@
                         </div>
                           <div class="form-group"></div>
 
-                        <select class ="form-control" name="eventoRiesgoId" id="id" required>
-						<option > Selecciona un evento de riesgo </option>
+      
+
+                        <select class ="form-control custom-select is-invalid" name="eventoRiesgoId" id="id" aria-describedby="validationServer04Feedback" required>
+						 <option selected disabled value="">Eventos de riesgo</option>
 						{{#each eventoRiesgos }}
                                   <option value="{{id}}" name="id"> {{EventoRiesgo}}</option>
                          {{/each}}

@@ -71,12 +71,23 @@ router.get('/delete/:id', async (req, res) => {
 });
 
 router.get('/edit/:id', isLoggedIn,roles,async (req, res) => {
+    var loginAdmin = false;
+    var loginGeneral = false;
+
+    rol = req.user.rol;
+    if(rol == "Admin") {
+        loginAdmin = true;
+        }
+        if(rol == "General") {
+            loginGeneral = true;
+            }
     const { id } = req.params;
     const evento = await pool.query('SELECT * FROM eventos WHERE id = ?', [id]);
   
     res.render('evento/edit', {
         layout: "dashboard",
-        
+        loginAdmin,
+        loginGeneral,
         evento: evento[0]});
 });
 

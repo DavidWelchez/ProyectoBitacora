@@ -70,12 +70,23 @@ router.get('/delete/:id', async (req, res) => {
 });
 
 router.get('/edit/:id', isLoggedIn,roles,async (req, res) => {
+    var loginAdmin = false;
+    var loginGeneral = false;
+
+    rol = req.user.rol;
+    if(rol == "Admin") {
+        loginAdmin = true;
+        }
+        if(rol == "General") {
+            loginGeneral = true;
+            }
     const { id } = req.params;
     const proveedor = await pool.query('SELECT * FROM proveedors WHERE id = ?', [id]);
   
     res.render('proveedor/edit', {
         layout: "dashboard",
-        
+        loginAdmin,
+        loginGeneral,
         proveedor: proveedor[0]});
 });
 

@@ -3,11 +3,26 @@ const router = express.Router();
 
 const passport = require('passport');
 const { isLoggedIn } = require('../lib/auth');
+const { roles ,} = require('../lib/rol'); 
 
 
 // SIGNUP
-router.get('/signup', (req, res) => {
-  res.render('auth/signup');
+router.get('/signup',isLoggedIn,roles, (req, res) => {
+  var loginAdmin = false;
+    var loginGeneral = false;
+    rol = req.user.rol;
+    if(rol == "Admin") {
+        loginAdmin = true;
+        }
+        if(rol == "General") {
+            loginGeneral = true;
+            }
+  res.render('auth/signup',{
+    layout: "dashboard",
+    loginAdmin,
+    loginGeneral
+
+  });
 });
 
 router.post('/signup', passport.authenticate('local.signup', {
