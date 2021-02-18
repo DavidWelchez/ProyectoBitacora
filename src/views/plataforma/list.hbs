@@ -2,10 +2,19 @@
     <h1 class="text-center">PLATAFORMA</h1>
     <div  style="padding-left: 20%;" > 
     
+ <div class="row">                
+        <div class="col"> 
+             <a class="btn btn-success btn2 "  href="/plataforma/add"><i class="fa fa-plus"> Crear Nuevo</i>  </a>
+        </div>
+                <div class="col" style="padding-left: 5%;">
+                 <form action="/usuario/buscar" method="POST">
+                  <input class="" type="text" name="fullname" placeholder="Buscar" id="fullname" >
+                  <button class="btn btn-success btn3">Buscar</button>
+                 </form> 
+                </div>
+      </div>
 
-      <h3 style="padding-left: 60%;"><a class="btn btn-success btn2" href="/plataforma/add"><i class="fa fa-plus"> Crear Nuevo</i> 
-                                    </a>
-                              </h3>
+   
     <div id="scroll" class="overflow-auto overflow-hidden">
         <div id="table-wrapper">
   <div id="table-scroll">

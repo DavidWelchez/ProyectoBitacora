@@ -14,8 +14,8 @@
                         </div>
                           <div class="form-group"></div>
 
-                        <select class ="form-control" name="incidenteId" id="id" required>
-						<option > Selecciona un tipo de incidente </option>
+                        <select class ="form-control custom-select is-invalid" name="incidenteId" id="id" aria-describedby="validationServer04Feedback" required>
+						 <option selected disabled value="">Incidentes</option>
 						{{#each incidentes }}
                                   <option value="{{id}}" name="id"> {{incidente}}</option>
                          {{/each}}

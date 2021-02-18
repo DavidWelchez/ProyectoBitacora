@@ -67,35 +67,47 @@ router.get('/', isLoggedIn,roles, async (req, res) => {
     });
 });
 
-// router.get('/delete/:id',isLoggedIn,roles, async (req, res) => {
-//     const { id } = req.params;
-//     await pool.query('DELETE FROM factorRiesgos WHERE ID = ?', [id]);
-//     req.flash('success', 'Factor de  Riesgo eliminado');
-//     res.redirect('/factorRiesgo');
-// });
+router.get('/delete/:id',isLoggedIn,roles, async (req, res) => {
+    const { id } = req.params;
+    await pool.query('DELETE FROM plataformas WHERE ID = ?', [id]);
+    req.flash('success', 'Plataforma eliminada');
+    res.redirect('/plataforma');
+});
 
-// router.get('/edit/:id', isLoggedIn,roles,async (req, res) => {
-//     const { id } = req.params;
-//     const eventoRiesgos = await pool.query('SELECT * FROM eventoRiesgos ');
-//     const factor = await pool.query('SELECT * FROM factorRiesgos WHERE id = ?', [id]);
-  
-//     res.render('factorRiesgo/edit', {
-//         layout: "dashboard",
-//         eventoRiesgos,
-//         factor: factor[0]});
-// });
+router.get('/edit/:id', isLoggedIn,roles,async (req, res) => {
+    var loginAdmin = false;
+    var loginGeneral = false;
 
-// router.post('/edit/:id', async (req, res) => {
-//     const { id } = req.params;
-//     const { factor, eventoRiesgoId } = req.body;
-//     const newefactorRiesgo = {
-//         factor,
-//         eventoRiesgoId
+    rol = req.user.rol;
+    if(rol == "Admin") {
+        loginAdmin = true;
+        }
+        if(rol == "General") {
+            loginGeneral = true;
+            }
+    const { id } = req.params;
+    const incidente = await pool.query('SELECT * FROM incidentes ');
+    const plataforma = await pool.query('SELECT * FROM plataformas WHERE id = ?', [id]);
+    res.render('plataforma/edit', {
+        layout: "dashboard",
+        loginAdmin,
+        loginGeneral,
+        incidente,
+        plataforma: plataforma[0]});
+});
+
+router.post('/edit/:id', async (req, res) => {
+    const { id } = req.params;
+
+    const { plataforma, incidenteId } = req.body;
+    const neweplataforma = {
+        plataforma,
+        incidenteId
         
-//     };
-//     await pool.query('UPDATE factorRiesgos set ? WHERE id = ?', [newefactorRiesgo, id]);
-//     req.flash('success', 'Evento de Riesgo actualizado');
-//     res.redirect('/factorRiesgo');
-// });
+    };
+    await pool.query('UPDATE plataformas set ? WHERE id = ?', [neweplataforma, id]);
+    req.flash('success', 'Plataforma actualizado');
+    res.redirect('/plataforma');
+});
 
 module.exports = router;
