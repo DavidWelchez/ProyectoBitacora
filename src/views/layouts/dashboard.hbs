@@ -13,12 +13,13 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
     crossorigin="anonymous">
   {{!-- STYLES --}}
-  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/styleDash.css">
 </head>
 <body>
  {{>navigation}}
  {{>message}} 
 <div class="area"></div>
+
       <nav class="main-menu dash">
             
               
@@ -26,21 +27,12 @@
                   
                 {{#if loginAdmin}}
                 <ul>
-                    <li class="has-subnav">
-                    <a href="#">
-                       <i class="fa fa-list fa-2x"></i>
-                        <span class="nav-text">
-                           
-                        </span>
-                    </a>
-                    
-                </li>
-                <br>
-                <br>
+                   
+                
                  <li>
                     <a href="/profile">
-                        {{!-- <i class="fa fa-home fa-2x"></i> --}}
-                        <i class="fa fa-address-book-o"></i>
+                        <i class="fa fa-home fa-2x"></i>
+                    
                         <span class="nav-text">
                             Inicio
                         </span>
@@ -48,77 +40,87 @@
                   
                 </li>
                   
+                  <div class="dropdown-divider"></div>
                  <li>
                     <a href="/bitacora">
-                    {{!-- <i class="fa fa-table fa-2x"></i>
-                        --}}
-                        <i class="fa fa-address-book-o"></i>
+                    <i class="fa fa-table fa-2x"></i>
+                       
+                        
                         <span class="nav-text">
-                            Bitacora
+                            Bitácora
                         </span>
                     </a>
                 </li>
+                <div class="dropdown-divider"></div>
                 <li class="has-subnav">
                     <a href="/usuario">               
-                    <i class="fa fa-address-book-o"></i>
-
+                    
+<i class="fa fas fa-users fa-2x"></i>
                         <span class="nav-text">
                             Usuarios
                         </span>
                     </a>
-                    <div class="dropdown-divider"></div>
+                  
                 </li>
-                <li class="has-subnav">
+                 <div class="dropdown-divider"></div>
+
+<li>
+                    <a href="/evento">
+                        <i class="fa fas fa-calendar-alt fa-2x"></i>
+                        <span class="nav-text">
+                           Eventos
+                        </span>
+                    </a>
+                </li>
+
+            <div class="dropdown-divider"></div>
+             <li class="has-subnav">
                     <a href="/proveedor">
-                       <i class="fa fa-address-book-o"></i>
+                       <i class="fa fas fa-address-card fa-2x"></i>
                         <span class="nav-text">
                             Provedores
                         </span>
                     </a>
                     
                 </li>
-            <div class="dropdown-divider"></div>
-                <li>
-                    <a href="/evento">
-                        <i class="fa fa-address-book-o"></i>
-                        <span class="nav-text">
-                           Eventos
-                        </span>
-                    </a>
-                </li>
+                <div class="dropdown-divider"></div>
                 <li>
                     <a href="/incidente">
-                        <i class="fa fa-address-book-o"></i>
+                       <i class="fa fa-folder-open fa-2x"></i>
                         <span class="nav-text">
                            Incidentes
                         </span>
                     </a>
                 </li>
+                <div class="dropdown-divider"></div>
                 <li>
                     <a href="/plataforma">
-                       <i class="fa fa-address-book-o"></i>
+                        <i class="fa fa-laptop fa-2x"></i>
                         <span class="nav-text">
                            Plataformas
                         </span>
                     </a>
                 </li>
+                <div class="dropdown-divider"></div>
                 <li>
                    <a href="/eventoRiesgo">
-                      <i class="fa fa-address-book-o"></i>
+                      <i class="fa fas fa-calendar-times fa-2x"></i>
                         <span class="nav-text">
                             
                             Eventos de riesgo
                         </span>
                     </a>
                 </li>
+                <div class="dropdown-divider"></div>
                 <li>
                    <a href="/factorRiesgo">
-                        <i class="fa fa-address-book-o"></i>
+                        <i class="fa fas fa-exclamation-triangle fa-2x"></i>
                         <span class="nav-text">
                             Factor de riesgo
                         </span>
                     </a>
                 </li>
+                <div class="dropdown-divider"></div>
                
             </ul>
 
@@ -127,55 +129,51 @@
                    <a href="/logout">
                          <i class="fa fa-power-off fa-2x"></i>
                         <span class="nav-text">
-                            Cerrar sesion
+                            Cerrar sesión
                         </span>
                     </a>
                 </li>  
                 </ul>
 {{else}}
 <ul>
-    <li class="has-subnav">
-                    <a href="#">
-                      <i class="fa fa-list fa-2x"></i>
-                        <span class="nav-text">
-                           
-                        </span>
-                    </a>
-                    
-                </li>
-                <br>
-                <br>
-<li>
+    <br>
+    <br>
+    <br>
+    <div class="dropdown-divider"></div>
+  <li>
                     <a href="/profile">
-                        {{!-- <i class="fa fa-address-book-o"></i> --}}
-                         <i class="fa fa-address-book-o"></i>
+                        <i class="fa fa-home fa-2x"></i>
+                    
                         <span class="nav-text">
                             Inicio
                         </span>
                     </a>
                   
                 </li>
-               
+                  
+                  <div class="dropdown-divider"></div>
                  <li>
-                    <a href="#">
-                      {{!-- <i class="fa fa-address-book-o"></i> --}}
-                       <i class="fa fa-address-book-o"></i>
+                    <a href="/bitacora">
+                    <i class="fa fa-table fa-2x"></i>
+                       
+                        
                         <span class="nav-text">
-                            Bitacora
+                            Bitácora
                         </span>
                     </a>
                 </li>
+                <div class="dropdown-divider"></div>
 
-  <li>
       
 
  </ul>
  <ul class="logout">
+     <div class="dropdown-divider"></div>
                 <li>
                    <a href="/logout">
                          <i class="fa fa-power-off fa-2x"></i>
                         <span class="nav-text">
-                            Cerrar sesion
+                            Cerrar sesión
                         </span>
                     </a>
                 </li>  
