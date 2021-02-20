@@ -64,9 +64,19 @@ router.get('/', isLoggedIn,roles, async (req, res) => {
 
 router.get('/delete/:id', async (req, res) => {
     const { id } = req.params;
-    await pool.query('DELETE FROM proveedors WHERE ID = ?', [id]);
-    req.flash('success', 'Proveedor eliminado');
-    res.redirect('/proveedor');
+    const proveedor = await pool.query('SELECT * FROM bitacoras WHERE proveedorId = ? ',[id]);
+    if (proveedor[0]==null){
+        const { id } = req.params;
+        await pool.query('DELETE FROM proveedors WHERE ID = ?', [id]);
+        req.flash('success', 'Proveedor eliminado');
+        res.redirect('/proveedor');
+    
+}else{
+    req.flash('message', 'Proveedor no puede ser eliminado debido a que pertenece a otra tabla');
+res.redirect('/proveedor');
+
+}
+  
 });
 
 router.get('/edit/:id', isLoggedIn,roles,async (req, res) => {
