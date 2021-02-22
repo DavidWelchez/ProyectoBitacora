@@ -3,10 +3,13 @@
     <div  style="padding-left: 20%;" > 
     
  <div class="row">                
-        <div class="col"> 
+        <div class="col-sm-4"> 
              <a class="btn btn-success btn2 "  href="/proveedor/add"><i class="fa fa-plus"> Crear Nuevo</i>  </a>
         </div>
-                <div class="col" style="padding-left: 5%;">
+        <div class="col-sm-3">
+            <a class="btn btn-success  btn3"  href="/proveedor"><i> Refrescar</i></a>
+        </div>
+                <div class="col-sm-5">
                  <form action="/proveedor/buscar" method="POST">
                   <input class="" type="text" name="proveedor" placeholder="Buscar" id="proveedor" >
                   <button class="btn btn-success btn3">Buscar</button>
@@ -35,8 +38,8 @@
                                         
                                     </tr>
                                 </thead>
-                                {{#each proveedor}}
-                                <tr>
+                                {{#each proveedores}}
+                                        <tr>
                                     <td>{{proveedor}}</td>
 
                                      <td>

@@ -112,4 +112,28 @@ router.post('/edit/:id', async (req, res) => {
     res.redirect('/proveedor');
 });
 
+router.post('/buscar', isLoggedIn,roles, async (req, res) => {
+    var loginAdmin = false;
+    var loginGeneral = false;
+
+    rol = req.user.rol;
+    if(rol == "Admin") {
+        loginAdmin = true;
+        }
+        if(rol == "General") {
+            loginGeneral = true;
+            }
+
+     const { proveedor } = req.body;
+    const proveedores = await pool.query('SELECT * FROM proveedors WHERE proveedor = ?', [proveedor]);
+    
+    res.render('proveedor/buscar', { 
+        
+        layout: "dashboard",
+        loginAdmin,
+        loginGeneral,
+        proveedores 
+    });
+});
+
 module.exports = router;

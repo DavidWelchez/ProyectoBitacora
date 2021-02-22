@@ -1,14 +1,17 @@
 <div class="container" > 
-    <h1 class="text-center">PROVEEDORES</h1>
+    <h1 class="text-center sm-2">PLATAFORMA</h1>
     <div  style="padding-left: 20%;" > 
     
  <div class="row">                
-        <div class="col"> 
-             <a class="btn btn-success btn2 "  href="/proveedor/add"><i class="fa fa-plus"> Crear Nuevo</i>  </a>
+        <div class="col-sm-4"> 
+             <a class="btn btn-success btn2 "  href="/plataforma/add"><i class="fa fa-plus"> Crear Nuevo</i>  </a>
         </div>
-                <div class="col" style="padding-left: 5%;">
-                 <form action="/proveedor/buscar" method="POST">
-                  <input class="" type="text" name="proveedor" placeholder="Buscar" id="proveedor" >
+        <div class="col-sm-3">
+            <a class="btn btn-success  btn3"  href="/plataforma"><i> Refrescar</i></a>
+        </div>
+                <div class="col-sm-5">
+                 <form action="/plataforma/buscar" method="POST">
+                  <input class="" type="text" name="plataforma" placeholder="Buscar" id="plataforma" >
                   <button class="btn btn-success btn3">Buscar</button>
                  </form> 
                 </div>
@@ -28,26 +31,31 @@
 
                           
 
-                            <table class="table">
+                            <table class="table ">
                                 <thead>
                                     <tr>
-                                        <th>Proveedor</th>
+                                        <th>Plataforma</th>
+                                         <th>Incidente</th>
+
                                         
                                     </tr>
                                 </thead>
-                                {{#each proveedor}}
+                                {{#each plataformas }}
                                 <tr>
-                                    <td>{{proveedor}}</td>
+                                    <td>{{plataforma}}</td>
+                                <td>{{incidente}}</td>
+
+
 
                                      <td>
-                                        <a href="/proveedor/delete/{{id}}" onClick="alert('Desea eliminar este registro?')"  aria-label="borrar">
-                                        
-                         <i  class="fas fa-trash-alt" style="color: #f80000;  " aria-hidden="true" ></i> 
+                                        <a class="btn btn-danger" href="/plataforma/delete/{{id}}">
+                        Eliminar
                     </a>
-                    </td>
-                    <td>
-
-                                       <a  href="/proveedor/edit/{{id}}" aria-checked="actualizar"><i class="fas fa-pencil-alt" style="color: rgb(35, 148, 0);  " aria-hidden="true" ></i> </a>
+                     </td>
+                      <td>
+                                       <a class="btn btn-secondary" href="/plataforma/edit/{{id}}">
+                        Editar
+                    </a>
                                     </td>
                                     
                                     
@@ -61,7 +69,7 @@
                             </table>
                         </div>
 
-                       
+                        
                     </div>
                 </div>
 

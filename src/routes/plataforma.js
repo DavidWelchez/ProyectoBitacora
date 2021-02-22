@@ -110,4 +110,28 @@ router.post('/edit/:id', async (req, res) => {
     res.redirect('/plataforma');
 });
 
+router.post('/buscar', isLoggedIn,roles, async (req, res) => {
+    var loginAdmin = false;
+    var loginGeneral = false;
+
+    rol = req.user.rol;
+    if(rol == "Admin") {
+        loginAdmin = true;
+        }
+        if(rol == "General") {
+            loginGeneral = true;
+            }
+
+     const { plataforma } = req.body;
+    const plataformas = await pool.query('SELECT plataformas.id, plataformas.plataforma, incidentes.incidente  FROM plataformas, incidentes where plataformas.incidenteId=incidentes.id  and plataforma= ?',[plataforma] );
+ 
+    res.render('plataforma/buscar', { 
+        
+        layout: "dashboard",
+        loginAdmin,
+        loginGeneral,
+        plataformas
+    });
+});
+
 module.exports = router;
