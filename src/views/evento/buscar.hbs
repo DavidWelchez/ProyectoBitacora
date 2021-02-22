@@ -1,20 +1,20 @@
+
 <div class="container" > 
-    <h1 class="text-center">PLATAFORMA</h1>
+    <h1 class="text-center">TIPO DE EVENTO </h1>
     <div  style="padding-left: 20%;" > 
-    
- <div class="row">                
+    <div class="row">                
         <div class="col"> 
-             <a class="btn btn-success btn2 "  href="/plataforma/add"><i class="fa fa-plus"> Crear Nuevo</i>  </a>
+             <a class="btn btn-success btn2 "  href="/evento/add"><i class="fa fa-plus"> Crear Nuevo</i>  </a>
         </div>
                 <div class="col" style="padding-left: 5%;">
-                 <form action="/plataforma/buscar" method="POST">
-                  <input class="" type="text" name="plataforma" placeholder="Buscar" id="plataforma" >
+                 <form action="/evento/buscar" method="POST">
+                  <input class="" type="text" name="evento" placeholder="Buscar" id="evento" >
                   <button class="btn btn-success btn3">Buscar</button>
                  </form> 
                 </div>
       </div>
 
-   
+      
     <div id="scroll" class="overflow-auto overflow-hidden">
         <div id="table-wrapper">
   <div id="table-scroll">
@@ -28,31 +28,23 @@
 
                           
 
-                            <table class="table ">
+                            <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>Plataforma</th>
-                                         <th>Incidente</th>
-
+                                        <th>Tipo de evento</th>
                                         
                                     </tr>
                                 </thead>
-                                {{#each plataforma }}
+                                {{#each eventos}}
                                 <tr>
-                                    <td>{{plataforma}}</td>
-                                <td>{{incidente}}</td>
-
-
-      <td>
-                                        <a  href="/plataforma/delete/{{id}}" onClick="alert('¿Desea eliminar este registro?')"  aria-label="borrar" >
+                                    <td>{{evento}}</td>
+                                  <td>
+                                        <a  href="/evento/delete/{{id}}" onClick="alert('¿Desea eliminar este registro?')"  aria-label="borrar" >
                                         
                          <i  class="fas fa-trash-alt" title="Eliminar" style="color: #f80000;  " aria-hidden="true" ></i> 
-                    </a> 
+                    </a> &nbsp;&nbsp;&nbsp;&nbsp;
 
-                    </td>
-                    <td>
-
-                                       <a  href="/plataforma/edit/{{id}}" aria-checked="actualizar"><i class="fas fa-pencil-alt" title="Editar" style="color: rgb(35, 148, 0);  " aria-hidden="true" ></i> </a>
+                                       <a  href="/evento/edit/{{id}}" aria-checked="actualizar"><i class="fas fa-pencil-alt" title="Editar" style="color: rgb(35, 148, 0);  " aria-hidden="true" ></i> </a>
                                     </td>
                                     
                                     
@@ -66,7 +58,7 @@
                             </table>
                         </div>
 
-                        
+                       
                     </div>
                 </div>
 
@@ -83,4 +75,3 @@
 
 </div>
 </div>
-

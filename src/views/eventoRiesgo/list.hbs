@@ -1,16 +1,19 @@
-
-
-
-
-
 <div class="container" > 
     <h1 class="text-center">EVENTOS DE RIESGO </h1>
     <div  style="padding-left: 20%;" > 
+         <div class="row">                
+        <div class="col"> 
+             <a class="btn btn-success btn2 "  href="/eventoRiesgo/add"><i class="fa fa-plus"> Crear Nuevo</i>  </a>
+        </div>
+                <div class="col" style="padding-left: 5%;">
+                 <form action="/eventoRiesgo/buscar" method="POST">
+                  <input class="" type="text" name="eventoRiesgo" placeholder="Buscar" id="eventoRiesgo" >
+                  <button class="btn btn-success btn3">Buscar</button>
+                 </form> 
+                </div>
+      </div>
     
 
-      <h3 style="padding-left: 60%;"><a class="btn btn-success btn2" href="/eventoRiesgo/add"><i class="fa fa-plus"> Crear Nuevo</i> 
-                                    </a>
-                              </h3>
     <div id="scroll" class="overflow-auto overflow-hidden">
         <div id="table-wrapper">
   <div id="table-scroll">
@@ -34,14 +37,13 @@
                                 {{#each eventoRiesgos}}
                                 <tr>
                                     <td>{{EventoRiesgo}}</td>
-                                     <td>
-                                        <a class="btn btn-danger" href="/eventoRiesgo/delete/{{id}}">
-                        Eliminar
-                    </a>
-                    
-                                       <a class="btn btn-secondary" href="/eventoRiesgo/edit/{{id}}">
-                        Editar
-                    </a>
+                                       <td>
+                                        <a  href="/eventoRiesgo/delete/{{id}}" onClick="alert('¿Desea eliminar este registro?')"  aria-label="borrar" >
+                                        
+                         <i  class="fas fa-trash-alt" title="Eliminar" style="color: #f80000;  " aria-hidden="true" ></i> 
+                    </a> &nbsp;&nbsp;&nbsp;&nbsp;
+
+                                       <a  href="/eventoRiesgo/edit/{{id}}" aria-checked="actualizar"><i class="fas fa-pencil-alt" title="Editar" style="color: rgb(35, 148, 0);  " aria-hidden="true" ></i> </a>
                                     </td>
                                     
                                     
@@ -54,32 +56,6 @@
     {{/each}}
                             </table>
                         </div>
-
-                        {{!-- <div class="col-2 col-sm-1">
-                            <h3> <br><br> </h3>
-                            <br><br>
-                            <table class="table">
-                                <thead>
-                                    <tr>
-
-                                    </tr>
-                                </thead>
-                                {{!-- {{#each servicios}}
-                                <tr>
-
-                                    <td style="border-color: #FFFFFF; height: 145px;">
-
-                                        <a href="/modificar-servicio/{{this.url}}"><i class="fa fa-pencil fa-lg"
-                                                style="color: #F88600;  " aria-hidden="true">
-
-                                            </i></a>
-
-                                    </td>
-                                </tr>
-                                {{/each}} --}}
-{{!-- 
-                            </table>
-                        </div> --}}
                     </div>
                 </div>
 
@@ -97,38 +73,3 @@
 </div>
 </div>
 
-
-{{!-- 
-<div class="container p-4">
-    <div class="row">
-        {{#each eventoRiesgos}}
-        <div class="col-md-3">
-            <div class="card text-center">
-                <div class="card-body">
-                    <a href="{{url}}" target="_blank">
-                        <h3 class="card-title text-uppercase">
-                            {{EventoRiesgo}}
-                        </h3>
-                    </a>
-                   
-                    <a class="btn btn-danger" href="/eventoRiesgo/delete/{{id}}">
-                        Eliminar
-                    </a>
-                    <a class="btn btn-secondary" href="/eventoRiesgo/edit/{{id}}">
-                        Editar
-                    </a>
-                </div>
-            </div>
-        </div>
-        {{else}}
-        <div class="col-md-4 mx-auto">
-            <div class="card card-body text-center">
-                <p>No tienes empleados creados </p>
-                <a href="/eventoRiesgo/add">Agregar</a>
-            </div>
-        </div>
-        {{/each}}
-    </div>
-</div>
-
- --}}

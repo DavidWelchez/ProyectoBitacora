@@ -60,21 +60,21 @@
 
 
 
-                                     <td>
-                                        <a class="btn btn-danger" href="/usuario/delete/{{id}}">
-                        Eliminar
+                                      <td>
+                                        <a  href="/usuario/delete/{{id}}" onClick="alert('¿Desea eliminar este registro?')"  aria-label="borrar" title="actu">
+                                        
+                         <i  class="fas fa-trash-alt" title="Eliminar" style="color: #f80000;  " aria-hidden="true" ></i> 
                     </a>
-                     </td>
-                      <td>
-                                       <a class="btn btn-secondary" href="/usuario/edit/{{id}}">
-                        Editar
-                    </a>
-                                    </td>
-                                                  <td>
-                                        <a class="btn btn-danger" href="/usuario/editpass/{{id}}">
-                        Cambiar contraseña
-                    </a>
-                     </td>
+                    </td>
+                     <td>
+                       <a  href="/usuario/editpass/{{id}}">
+                        <i class="fas fa-unlock-alt" title="Cambiar contraseña" style="color: rgb(255, 174, 0);"></i>
+                       </a>
+                    </td>
+                           
+                    <td>
+                       <a  href="/usuario/edit/{{id}}" ><i class="fas fa-pencil-alt" title="Editar" style="color: rgb(35, 148, 0);  " aria-hidden="true" ></i> </a>
+                   </td>
                                     
                                     
 
@@ -98,7 +98,7 @@
 
         </div>
         <br>
-         <a class="btn btn-success btn2 "  href="/usuario"><i class="fa fa-plus"> Refrescar</i> 
+         <a  href="/usuario"><i class="fas fa-arrow-circle-left fa-2x" style="color: rgb(35, 148, 0);"></i> 
                                     </a>
     </div>
 

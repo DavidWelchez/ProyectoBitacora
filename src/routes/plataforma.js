@@ -42,7 +42,7 @@ router.post('/add/', async (req, res) => {
     };
     
     await pool.query('INSERT INTO plataformas set ?', [newplataforma]);
-    req.flash('success', 'Platafora guardado ');
+    req.flash('success', 'Plataforma guardada.');
     res.redirect('/plataforma');
 });
 
@@ -67,11 +67,21 @@ router.get('/', isLoggedIn,roles, async (req, res) => {
     });
 });
 
-router.get('/delete/:id',isLoggedIn,roles, async (req, res) => {
+router.get('/delete/:id', async (req, res) => {
     const { id } = req.params;
-    await pool.query('DELETE FROM plataformas WHERE ID = ?', [id]);
-    req.flash('success', 'Plataforma eliminada');
-    res.redirect('/plataforma');
+    const plataforma = await pool.query('SELECT * FROM bitacoras WHERE plataformaId = ? ',[id]);
+    if (plataforma[0]==null){
+        const { id } = req.params;
+        await pool.query('DELETE FROM plataformas WHERE ID = ?', [id]);
+        req.flash('success', 'Plataforma eliminado');
+        res.redirect('/plataforma');
+    
+}else{
+    req.flash('message', 'ERROR, este campo no puede ser eliminado');
+res.redirect('/plataforma');
+
+}
+  
 });
 
 router.get('/edit/:id', isLoggedIn,roles,async (req, res) => {

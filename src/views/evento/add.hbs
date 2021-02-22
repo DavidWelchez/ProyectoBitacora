@@ -1,5 +1,13 @@
-<h1 class="text-center">EVENTOS</h1>
-
+<div class="container " style="padding-left: 30%; padding-top: 2%;">
+     <div class="row">
+        <div class="col-md-1">
+           <a href="/evento"><i class="fas fa-arrow-circle-left fa-2x" style="color: rgb(35, 148, 0);"></i></a> 
+        </div>
+        <div class="col" >
+            <h2>Agregar evento.</h2>
+        </div>
+    </div>
+</div>
 
 
 <div class="container p-4">
@@ -10,7 +18,7 @@
                 <div class="card-body">
                     <form action="/evento/add" method="POST">
                         <div class="form-group">
-                            <input type="text" name="evento" class="form-control" placeholder="Tipo de evento" autofocus>
+                            <input type="text" name="evento" class="form-control" placeholder="Tipo de evento" autofocus required>
                         </div>
                         
                         

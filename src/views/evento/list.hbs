@@ -2,11 +2,19 @@
 <div class="container" > 
     <h1 class="text-center">TIPO DE EVENTO </h1>
     <div  style="padding-left: 20%;" > 
-    
+    <div class="row">                
+        <div class="col"> 
+             <a class="btn btn-success btn2 "  href="/evento/add"><i class="fa fa-plus"> Crear Nuevo</i>  </a>
+        </div>
+                <div class="col" style="padding-left: 5%;">
+                 <form action="/evento/buscar" method="POST">
+                  <input class="" type="text" name="evento" placeholder="Buscar" id="evento" >
+                  <button class="btn btn-success btn3">Buscar</button>
+                 </form> 
+                </div>
+      </div>
 
-      <h3 style="padding-left: 60%;"><a class="btn btn-success btn2" href="/evento/add"><i class="fa fa-plus"> Crear Nuevo</i> 
-                                    </a>
-                              </h3>
+      
     <div id="scroll" class="overflow-auto overflow-hidden">
         <div id="table-wrapper">
   <div id="table-scroll">
@@ -30,14 +38,13 @@
                                 {{#each evento}}
                                 <tr>
                                     <td>{{evento}}</td>
-                                     <td>
-                                        <a class="btn btn-danger" href="/evento/delete/{{id}}">
-                        Eliminar
-                    </a>
-                    
-                                       <a class="btn btn-secondary" href="/evento/edit/{{id}}">
-                        Editar
-                    </a>
+                                  <td>
+                                        <a  href="/evento/delete/{{id}}" onClick="alert('¿Desea eliminar este registro?')"  aria-label="borrar" >
+                                        
+                         <i  class="fas fa-trash-alt" title="Eliminar" style="color: #f80000;  " aria-hidden="true" ></i> 
+                    </a> &nbsp;&nbsp;&nbsp;&nbsp;
+
+                                       <a  href="/evento/edit/{{id}}" aria-checked="actualizar"><i class="fas fa-pencil-alt" title="Editar" style="color: rgb(35, 148, 0);  " aria-hidden="true" ></i> </a>
                                     </td>
                                     
                                     

@@ -4,11 +4,20 @@
 <div class="container" > 
     <h1 class="text-center">TIPO DE INCIDENTES </h1>
     <div  style="padding-left: 20%;" > 
-    
+     <div class="row">                
+        <div class="col"> 
+             <a class="btn btn-success btn2 "  href="/incidente/add"><i class="fa fa-plus"> Crear Nuevo</i>  </a>
+        </div>
+                <div class="col" style="padding-left: 5%;">
+                 <form action="/incidente/buscar" method="POST">
+                  <input  type="text" name="incidente" placeholder="Buscar" id="incidente" >
+                  <button class="btn btn-success btn3">Buscar</button>
+                 </form> 
+                </div>
+      </div>
 
-      <h3 style="padding-left: 60%;"><a class="btn btn-success btn2" href="/incidente/add"><i class="fa fa-plus"> Crear Nuevo</i> 
-                                    </a>
-                              </h3>
+
+      
     <div id="scroll" class="overflow-auto overflow-hidden">
         <div id="table-wrapper">
   <div id="table-scroll">
@@ -33,13 +42,12 @@
                                 <tr>
                                     <td>{{incidente}}</td>
                                      <td>
-                                        <a class="btn btn-danger" href="/incidente/delete/{{id}}">
-                        Eliminar
-                    </a>
-                    
-                                       <a class="btn btn-secondary" href="/incidente/edit/{{id}}">
-                        Editar
-                    </a>
+                                        <a  href="/incidente/delete/{{id}}" onClick="alert('¿Desea eliminar este registro?')"  aria-label="borrar" >
+                                        
+                         <i  class="fas fa-trash-alt" title="Eliminar" style="color: #f80000;  " aria-hidden="true" ></i> 
+                    </a> &nbsp;&nbsp;&nbsp;&nbsp;
+
+                                       <a  href="/incidente/edit/{{id}}" aria-checked="actualizar"><i class="fas fa-pencil-alt" title="Editar" style="color: rgb(35, 148, 0);  " aria-hidden="true" ></i> </a>
                                     </td>
                                     
                                     

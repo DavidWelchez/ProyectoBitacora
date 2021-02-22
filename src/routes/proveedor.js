@@ -72,7 +72,7 @@ router.get('/delete/:id', async (req, res) => {
         res.redirect('/proveedor');
     
 }else{
-    req.flash('message', 'Proveedor no puede ser eliminado debido a que pertenece a otra tabla');
+    req.flash('message', 'ERROR, este campo no puede ser eliminado');
 res.redirect('/proveedor');
 
 }

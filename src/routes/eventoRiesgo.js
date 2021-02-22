@@ -63,11 +63,21 @@ router.get('/', isLoggedIn, roles, async (req, res) => {
     });
 });
 
-router.get('/delete/:id', isLoggedIn,roles,async (req, res) => {
+router.get('/delete/:id', async (req, res) => {
     const { id } = req.params;
-    await pool.query('DELETE FROM eventoRiesgos WHERE ID = ?', [id]);
-    req.flash('success', 'Evento Riesgo eliminado');
-    res.redirect('/eventoRiesgo');
+    const eventoR = await pool.query('SELECT * FROM factorRiesgos WHERE eventoRiesgoId = ? ',[id]);
+    if (eventoR[0]==null){
+        const { id } = req.params;
+        await pool.query('DELETE FROM eventoRiesgos WHERE ID = ?', [id]);
+        req.flash('success', 'Evento de Riesgo eliminado');
+        res.redirect('/eventoRiesgo');
+    
+}else{
+    req.flash('message', 'ERROR, este campo no puede ser eliminado');
+res.redirect('/eventoRiesgo');
+
+}
+  
 });
 
 router.get('/edit/:id', isLoggedIn,roles,async (req, res) => {
