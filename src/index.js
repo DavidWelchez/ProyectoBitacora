@@ -68,15 +68,9 @@ app.use('/bitacora', require('./routes/bitacora'));
 
 
 
-
-
-
-
-app.use('/dashboard', require('./routes/dashboard'));
-
-
 // Public
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'uploads')));
 
 // Starting
 app.listen(app.get('port'), () => {

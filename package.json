@@ -30,9 +30,11 @@
     "express-session": "^1.17.1",
     "express-validator": "^6.9.2",
     "morgan": "^1.10.0",
+    "multer": "^1.4.2",
     "mysql": "^2.18.1",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
+    "shortid": "^2.2.16",
     "timeago.js": "^4.0.2"
   },
   "devDependencies": {

@@ -57,13 +57,13 @@ router.get('/', isLoggedIn,roles, async (req, res) => {
         if(rol == "General") {
             loginGeneral = true;
             }
-    const plataforma = await pool.query('SELECT plataformas.id, plataformas.plataforma, incidentes.incidente  FROM plataformas, incidentes where plataformas.incidenteId=incidentes.id');
+    const plataformas = await pool.query('SELECT plataformas.id, plataformas.plataforma, incidentes.incidente  FROM plataformas, incidentes where plataformas.incidenteId=incidentes.id');
     res.render('plataforma/list', { 
         
         layout: "dashboard",
         loginAdmin,
         loginGeneral,
-        plataforma
+        plataformas
     });
 });
 
@@ -84,7 +84,7 @@ res.redirect('/plataforma');
   
 });
 
-router.get('/edit/:id', isLoggedIn,roles,async (req, res) => {
+router.get('/edit/:id/', isLoggedIn,roles,async (req, res) => {
     var loginAdmin = false;
     var loginGeneral = false;
 
@@ -96,13 +96,18 @@ router.get('/edit/:id', isLoggedIn,roles,async (req, res) => {
             loginGeneral = true;
             }
     const { id } = req.params;
-    const incidente = await pool.query('SELECT * FROM incidentes ');
+    
+    
+    
+    const incidentes = await pool.query('SELECT * FROM incidentes ');
     const plataforma = await pool.query('SELECT * FROM plataformas WHERE id = ?', [id]);
+    const incidente1 = await pool.query('SELECT * FROM incidentes WHERE id = ?', [plataforma[0].incidenteId]);
     res.render('plataforma/edit', {
         layout: "dashboard",
         loginAdmin,
         loginGeneral,
-        incidente,
+        incidentes,
+        incidente1: incidente1[0],
         plataforma: plataforma[0]});
 });
 

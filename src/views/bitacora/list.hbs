@@ -52,6 +52,7 @@
                                            <th scope="col">Estado</th>
                                            <th scope="col">Evento de riesgo</th>
                                            <th scope="col">Factor de riesgo</th>
+                                           <th scope="col">Imagen</th>
 
                                         
                                     </tr>
@@ -73,8 +74,17 @@
                                 <td>{{estado}}</td>
                                 <td>{{EventoRiesgo}}</td>
                                 <td>{{factor}}</td>
+                                {{#if archivo}}
+                                <td><a href="/{{archivo}}" alt="No contiene archivo" download>
 
+                                 
+                                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/File-Explorer-fluent-icon.png/220px-File-Explorer-fluent-icon.png" width="100" height="100" alt="No contiene archivo" > </a></td>
+{{else}}
+<td>
 
+                                 
+                                 <img src="https://static.thenounproject.com/png/140281-200.png" width="100" height="100" alt="No contiene archivo" > </td>
+{{/if}}
 
       <td>
                                         <a  href="/bitacora/delete/{{id}}" onClick="alert('¿Desea eliminar este registro?')"  aria-label="borrar" >
@@ -106,15 +116,8 @@
 
             </div>
 
-
         </div>
     </div>
 
 
-</div>
- </div>
-
-
-</div>
-</div>
 

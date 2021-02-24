@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const passport = require('passport');
-const { isLoggedIn } = require('../lib/auth');
+const { isLoggedIn,isnotLoggedIn } = require('../lib/auth');
 const { roles ,} = require('../lib/rol'); 
 
 
@@ -36,7 +36,7 @@ router.get('/signin', (req, res) => {
   res.render('auth/signin');
 });
 
-router.post('/signin', (req, res, next) => {
+router.post('/signin',isnotLoggedIn, (req, res, next) => {
   /*req.check('username', 'Username is Required').notEmpty();
   req.check('password', 'Password is Required').notEmpty();
   const errors = req.validationErrors();

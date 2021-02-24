@@ -6,9 +6,17 @@ module.exports = {
             return next();
         }
         return res.redirect('/signin');
+    },
+    isnotLoggedIn (req, res, next) {
+        if (!req.isAuthenticated()) {
+            return next();
+        }
+        return res.redirect('/profile');
     }
 
+
 };
+
 
 // module.exports ={
 //     roles(req, res, next) {
