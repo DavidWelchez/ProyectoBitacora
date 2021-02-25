@@ -125,7 +125,7 @@ router.post('/buscar', isLoggedIn,roles, async (req, res) => {
             }
 
      const { proveedor } = req.body;
-    const proveedores = await pool.query('SELECT * FROM proveedors WHERE proveedor = ?', [proveedor]);
+    const proveedores = await pool.query('SELECT * FROM proveedors WHERE proveedor like ?','%' +[proveedor]+'%',);
     
     res.render('proveedor/buscar', { 
         

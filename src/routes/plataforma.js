@@ -138,7 +138,7 @@ router.post('/buscar', isLoggedIn,roles, async (req, res) => {
             }
 
      const { plataforma } = req.body;
-    const plataformas = await pool.query('SELECT plataformas.id, plataformas.plataforma, incidentes.incidente  FROM plataformas, incidentes where plataformas.incidenteId=incidentes.id  and plataforma= ?',[plataforma] );
+    const plataformas = await pool.query('SELECT plataformas.id, plataformas.plataforma, incidentes.incidente  FROM plataformas, incidentes where plataformas.incidenteId=incidentes.id  and plataforma like ?','%' +[plataforma]+'%',);
  
     res.render('plataforma/buscar', { 
         

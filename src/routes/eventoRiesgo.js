@@ -113,4 +113,28 @@ router.post('/edit/:id', async (req, res) => {
     res.redirect('/eventoRiesgo');
 });
 
+router.post('/buscar', isLoggedIn,roles, async (req, res) => {
+    var loginAdmin = false;
+    var loginGeneral = false;
+
+    rol = req.user.rol;
+    if(rol == "Admin") {
+        loginAdmin = true;
+        }
+        if(rol == "General") {
+            loginGeneral = true;
+            }
+
+     const { EventoRiesgo } = req.body;
+    const eventoRiesgos = await pool.query('SELECT * FROM eventoRiesgos WHERE EventoRiesgo like ?','%' +[EventoRiesgo]+'%',);
+    
+    res.render('eventoRiesgo/buscar', { 
+        
+        layout: "dashboard",
+        loginAdmin,
+        loginGeneral,
+        eventoRiesgos 
+    });
+});
+
 module.exports = router;

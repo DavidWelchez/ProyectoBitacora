@@ -246,8 +246,8 @@ router.post('/buscar', isLoggedIn,roles, async (req, res) => {
             }
 
      const { fullname } = req.body;
-    const usuario = await pool.query('SELECT * FROM users WHERE fullname = ?', [fullname]);
-    console.log(fullname)
+    const usuario = await pool.query('SELECT * FROM users WHERE fullname  like ?','%' +[fullname]+'%',);
+
     res.render('usuario/buscar', { 
         
         layout: "dashboard",

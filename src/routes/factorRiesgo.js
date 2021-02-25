@@ -88,12 +88,14 @@ router.get('/edit/:id', isLoggedIn,roles,async (req, res) => {
     const { id } = req.params;
     const eventoRiesgos = await pool.query('SELECT * FROM eventoRiesgos ');
     const factor = await pool.query('SELECT * FROM factorRiesgos WHERE id = ?', [id]);
-  
+    const eventoRiesgos1 = await pool.query('SELECT * FROM eventoRiesgos WHERE id = ?', [factor[0].eventoRiesgoId]);
     res.render('factorRiesgo/edit', {
         layout: "dashboard",
         loginAdmin,
         loginGeneral,
         eventoRiesgos,
+        eventoRiesgos1: eventoRiesgos1[0],
+   
         factor: factor[0]});
 });
 
@@ -108,6 +110,30 @@ router.post('/edit/:id', async (req, res) => {
     await pool.query('UPDATE factorRiesgos set ? WHERE id = ?', [newefactorRiesgo, id]);
     req.flash('success', 'Evento de Riesgo actualizado');
     res.redirect('/factorRiesgo');
+});
+
+router.post('/buscar', isLoggedIn,roles, async (req, res) => {
+    var loginAdmin = false;
+    var loginGeneral = false;
+
+    rol = req.user.rol;
+    if(rol == "Admin") {
+        loginAdmin = true;
+        }
+        if(rol == "General") {
+            loginGeneral = true;
+            }
+
+     const { factor } = req.body;
+    const factorR = await pool.query('SELECT factorRiesgos.id, factorRiesgos.factor, eventoRiesgos.EventoRiesgo FROM factorRiesgos, eventoRiesgos where factorRiesgos.eventoRiesgoId=eventoRiesgos.id and factor like ?','%' +[factor]+'%', );
+ 
+    res.render('factorRiesgo/buscar', { 
+        
+        layout: "dashboard",
+        loginAdmin,
+        loginGeneral,
+        factorR
+    });
 });
 
 module.exports = router;

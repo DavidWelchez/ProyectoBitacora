@@ -32,7 +32,7 @@ router.post('/signup', passport.authenticate('local.signup', {
 }));
 
 // SINGIN
-router.get('/signin', (req, res) => {
+router.get('/signin',isnotLoggedIn, (req, res) => {
   res.render('auth/signin');
 });
 

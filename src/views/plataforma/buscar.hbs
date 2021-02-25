@@ -6,9 +6,7 @@
         <div class="col-sm-4"> 
              <a class="btn btn-success btn2 "  href="/plataforma/add"><i class="fa fa-plus"> Crear Nuevo</i>  </a>
         </div>
-        <div class="col-sm-3">
-            <a class="btn btn-success  btn3"  href="/plataforma"><i> Refrescar</i></a>
-        </div>
+        
                 <div class="col-sm-5">
                  <form action="/plataforma/buscar" method="POST">
                   <input class="" type="text" name="plataforma" placeholder="Buscar" id="plataforma" >
@@ -47,15 +45,16 @@
 
 
 
-                                     <td>
-                                        <a class="btn btn-danger" href="/plataforma/delete/{{id}}">
-                        Eliminar
-                    </a>
-                     </td>
-                      <td>
-                                       <a class="btn btn-secondary" href="/plataforma/edit/{{id}}">
-                        Editar
-                    </a>
+                                    <td>
+                                        <a  href="/plataforma/delete/{{id}}" onClick="alert('¿Desea eliminar este registro?')"  aria-label="borrar" >
+                                        
+                         <i  class="fas fa-trash-alt" title="Eliminar" style="color: #f80000;  " aria-hidden="true" ></i> 
+                    </a> 
+
+                    </td>
+                    <td>
+
+                                       <a  href="/plataforma/edit/{{id}}" aria-checked="actualizar"><i class="fas fa-pencil-alt" title="Editar" style="color: rgb(35, 148, 0);  " aria-hidden="true" ></i> </a>
                                     </td>
                                     
                                     
@@ -77,6 +76,9 @@
 
 
         </div>
+         <br>
+         <a  href="/plataforma" title="Refrescar"><i class="fas fa-arrow-circle-left fa-2x" style="color: rgb(35, 148, 0);"></i> 
+                                    </a>
     </div>
 
 

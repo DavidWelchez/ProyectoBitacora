@@ -138,7 +138,7 @@ height: 100%;
     position:relative;
   }
   #table-scroll {
-    height:300px;
+    height:380px;
     overflow:auto;  
     margin-top:20px;
   }
@@ -190,3 +190,15 @@ height: 100%;
 .nav-link {
   color:  rgb(35, 148, 0) !important;
 }
+
+
+#table-scroll2 {
+  height:497px;
+  overflow:auto;  
+  margin-top:2px;
+}
+#table-wrapper2 table {
+  width:300%;
+
+}
+

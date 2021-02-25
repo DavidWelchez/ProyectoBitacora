@@ -1,0 +1,183 @@
+<div class="container " style="padding-left: 30%; padding-top: 1%;">
+     <div class="row">
+        <div class="col-md-1">
+           <a href="/bitacora"><i class="fas fa-arrow-circle-left fa-2x" style="color: rgb(35, 148, 0);"></i></a> 
+        </div>
+        <div class="col" >
+            <h2>EDITAR BITÁCORA.</h2>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container ">
+    <div class="row">
+        <div class="col-md-10 mx-auto">
+           <div class="card">
+                <div class="card-body">
+
+                    <form action="/bitacora/edit/{{bitacora.id}}" method="POST" enctype="multipart/form-data">
+
+                    <div class="form-row"> 
+                            <div class="form-group col-md-3">
+                             <label for="validationServer03">Fecha de incidencia</label>
+                             <input type="date" class="form-control" name="fechaDeIncidencia" value="{{bitacora.fechaDeIncidencia}}" placeholder="Fecha de incidencia" autofocus required>
+                             <div class="invalid-tooltip">
+                             Por favor ingrese la fecha.
+                             </div>
+                            </div>
+                           
+                           <div class="form-group col-md-3">
+                           <label for="validationServer03">Hora  incidencia</label>
+                           <input type="time" class="form-control" name="horaDeIncidencia" value="{{bitacora.horaDeIncidencia}}" placeholder="Hora de incidencia" required>
+                           <div class="invalid-tooltip">
+                            Por favor ingrese la fecha.
+                        </div>
+                        </div>
+
+                        <div class="form-group col-md-3"> 
+                        <label for="validationServer03">Plataforma</label>
+                        <select class ="form-control custom-select is-invalid" name="plataformaId" id="id" aria-describedby="validationServer04Feedback" required>
+						 <option value="{{plataforma1.id}}" name="id">{{plataforma1.plataforma}}</option>
+						{{#each plataformas }}
+                                  <option value="{{id}}" name="id"> {{plataforma}}</option>
+                         {{/each}}
+					    </select>
+                        </div>   
+
+                        <div class="form-group col-md-3"> 
+                        <label for="validationServer03">Evento</label>
+                        <select class ="form-control custom-select is-invalid" name="eventoId" id="id" aria-describedby="validationServer04Feedback" required>
+						 <option value="{{eventos1.id}}" name="id">{{eventos1.evento}}</option>
+                         
+						{{#each eventos }}
+                                  <option value="{{id}}" name="id"> {{evento}}</option>
+                         {{/each}}
+					    </select>
+                        </div> 
+
+                    </div>
+
+                    <div class="form-row">
+
+                             <div class="form-group col-md-3">
+                             <label for="validationServer03">Describa la incidencia</label>
+                             <input type="text" name="descripcion" value="{{bitacora.descripcion}}" placeholder="{{bitacora.descripcion}}" required>
+                            
+                            </div>
+
+                             <div class="form-group col-md-3"> 
+                        <label for="validationServer03">Empleado reportó</label>
+                        <select class ="form-control custom-select is-invalid" name="userId" id="id" aria-describedby="validationServer04Feedback" required>
+						 <option value="{{usuarioR.id}}" name="id">{{usuarioR.fullname}}</option>
+						{{#each usuarios }}
+                                  <option value="{{id}}" name="id"> {{fullname}}</option>
+                         {{/each}}
+					    </select>
+                        </div> 
+
+                         <div class="form-group col-md-3"> 
+                        <label for="validationServer03">Empleado atendió</label>
+                        <select class ="form-control custom-select is-invalid" name="atendioid" id="id" aria-describedby="validationServer04Feedback" required>
+						 <option value="{{usuarioA.id}}" name="id">{{usuarioA.fullname}}</option>
+						{{#each usuarios }}
+                                  <option value="{{id}}" name="id"> {{fullname}}</option>
+                         {{/each}}
+					    </select>
+                        </div> 
+
+                        <div class="form-group col-md-3"> 
+                        <label for="validationServer03">Proveedor</label>
+                        <select class ="form-control custom-select is-invalid" name="proveedorId" id="id" aria-describedby="validationServer04Feedback" required>
+						 <option value="{{proveedores1.id}}" name="id">{{proveedores1.proveedor}}</option>
+						{{#each proveedores }}
+                                  <option value="{{id}}" name="id"> {{proveedor}}</option>
+                         {{/each}}
+					    </select>
+                        </div> 
+
+                       
+
+                    </div>  
+                    <div class="form-row">
+
+                         <div class="form-group col-md-3">
+                             <label for="validationServer03">Fecha de solución</label>
+                             <input type="date" class="form-control" name="fechaSolucion" value="{{bitacora.fechaSolucion}}" placeholder="Fecha solucion"  required>
+                             <div class="invalid-tooltip">
+                             Por favor ingrese la fecha.
+                             </div>
+                            </div>
+
+                        <div class="form-group col-md-3">
+                           <label for="validationServer03">Hora  solución</label>
+                           <input type="time" class="form-control" name="horaSolucion" value="{{bitacora.horaSolucion}}" placeholder="Hora de solucion" required>
+                           <div class="invalid-tooltip">
+                            Por favor ingrese la hora.
+                        </div>
+                        </div>
+
+                        <div class="form-group col-md-3"> 
+                        <label for="validationServer03">Estado</label>
+                        <select class ="form-control custom-select is-invalid" name="estado" id="id" aria-describedby="validationServer04Feedback" >
+						 <option value="{{bitacora.estado}}" name="estado">{{bitacora.estado}}</option>
+						
+                                  <option value="En espera" name="id">En espera </option>
+                                  <option value="En proceso" name="id">En proceso </option>
+                                  <option value="Completado" name="id">Completado </option>
+                         
+					    </select>
+                        </div> 
+
+                         <div class="form-group col-md-3"> 
+                        <label for="validationServer03">Factor de riesgo</label>
+                        <select class ="form-control custom-select is-invalid" name="factorRiesgoId" id="id" aria-describedby="validationServer04Feedback" required>
+						 <option value="{{factorRiesgos1.id}}" name="id">{{factorRiesgos1.factor}}</option>
+						{{#each factorRiesgos }}
+                                  <option value="{{id}}" name="id"> {{factor}}</option>
+                         {{/each}}
+					    </select>
+                        </div> 
+
+
+                    </div>
+                 
+                    
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                           <label for="validationServer03">Archivo</label>
+                           <input type="file" class="form-control"  value="{{bitacora.archivo}}" name="archivo" id="archivo" >
+                          
+                        </div>
+                      
+                        <div class="form-group col-md-3" style="padding-left: 60%; padding-top: 5%;">
+                             
+                              
+                           <button class="btn btn-success ">
+                                Guardar
+                            </button>
+                          
+                        </div>
+                     </form>
+                        
+                        
+
+
+                    </div>
+
+
+                                  
+
+
+
+                        
+                    
+                </div>
+
+    </div>
+            
+        </div>
+
+    </div>
+</div>

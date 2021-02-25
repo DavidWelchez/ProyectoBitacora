@@ -1,19 +1,21 @@
 <div class="container" > 
     <h1 class="text-center">BITÁCORA</h1>
-    <div  style="padding-left: 12%;" > 
+    <div  style="padding-left: 5%;" > 
     
  <div class="row">                
-        <div class="col-sm-3"> 
+        {{!-- <div class="col-sm-3">  --}}
+            <div class="col"> 
              <a class="btn btn-success btn2 "  href="/bitacora/add"><i class="fa fa-plus"> Crear Nuevo</i>  </a>
         </div>
-                <div class="col-sm-4" style="">
+                {{!-- <div class="col-sm-4" style="">
                  <form action="/bitacora/buscar" method="POST">
                   <input class="" type="text" name="fullname" placeholder="Buscar" id="fullname" >
                   <button class="btn btn-success btn3">Buscar</button>
                  </form> 
-                </div>
+                </div> --}}
 
-                <div class="col-sm-5">
+                {{!-- <div class="col-sm-5"> --}}
+                    <div class="col" style="padding-left: 20%;">
                       <form action="/bitacora/buscarfecha" method="POST">
                   <input class="" type="date" name="fecha1" placeholder="fecha" id="fecha1" >
                    <input class="" type="date" name="fecha2" placeholder="fecha" id="fecha2" >
@@ -25,7 +27,7 @@
 
    
     <div id="" class="overflow-auto overflow-hidden">
-        <div id="table-wrapper"></div>
+        <div id="table-wrapper2">
   <div id="table-scroll">
         
                     <div class="row" >
@@ -52,7 +54,7 @@
                                            <th scope="col">Estado</th>
                                            <th scope="col">Evento de riesgo</th>
                                            <th scope="col">Factor de riesgo</th>
-                                           <th scope="col">Imagen</th>
+                                           <th scope="col">Archivo</th>
 
                                         
                                     </tr>
@@ -78,7 +80,7 @@
                                 <td><a href="/{{archivo}}" alt="No contiene archivo" download>
 
                                  
-                                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/File-Explorer-fluent-icon.png/220px-File-Explorer-fluent-icon.png" width="100" height="100" alt="No contiene archivo" > </a></td>
+                                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/File-Explorer-fluent-icon.png/220px-File-Explorer-fluent-icon.png" width="50" height="50" alt="No contiene archivo" > </a></td>
 {{else}}
 <td>
 
@@ -113,7 +115,7 @@
                         
                     </div>
                 </div>
-
+</div>
             </div>
 
         </div>

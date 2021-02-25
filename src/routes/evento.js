@@ -125,7 +125,7 @@ router.post('/buscar', isLoggedIn,roles, async (req, res) => {
             }
 
      const { evento } = req.body;
-    const eventos = await pool.query('SELECT * FROM eventos WHERE evento = ?', [evento]);
+    const eventos = await pool.query('SELECT * FROM eventos WHERE evento like ?','%' +[evento]+'%',);
     
     res.render('evento/buscar', { 
         

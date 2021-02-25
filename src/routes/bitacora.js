@@ -227,41 +227,118 @@ router.get('/delete/:id',isLoggedIn, async (req, res) => {
     res.redirect('/bitacora');
 });
 
-// router.get('/edit/:id', isLoggedIn,async (req, res) => {
-//     var loginAdmin = false;
-//     var loginGeneral = false;
+router.get('/edit/:id', isLoggedIn,async (req, res) => {
+    var loginAdmin = false;
+    var loginGeneral = false;
 
-//     rol = req.user.rol;
-//     if(rol == "Admin") {
-//         loginAdmin = true;
-//         }
-//         if(rol == "General") {
-//             loginGeneral = true;
-//             }
-//     const { id } = req.params;
-//     const eventoRiesgos = await pool.query('SELECT * FROM eventoRiesgos ');
-//     const factor = await pool.query('SELECT * FROM factorRiesgos WHERE id = ?', [id]);
-  
-//     res.render('factorRiesgo/edit', {
-//         layout: "dashboard",
-//         loginAdmin,
-//         loginGeneral,
-//         eventoRiesgos,
-//         factor: factor[0]});
-// });
+    rol = req.user.rol;
+    if(rol == "Admin") {
+        loginAdmin = true;
+        }
+        if(rol == "General") {
+            loginGeneral = true;
+            }
+            const formatYmd= date=> date.toISOString().slice(0,10);
+    const { id } = req.params;
+    const plataformas = await pool.query('SELECT * FROM plataformas ');
+    const eventos = await pool.query('SELECT * FROM eventos ');
+    const usuarios = await pool.query('SELECT * FROM users ');
+    const proveedores = await pool.query('SELECT * FROM proveedors ');
+    const factorRiesgos = await pool.query('SELECT * FROM factorRiesgos ');
+    const bitacora = await pool.query('SELECT * FROM bitacoras WHERE id = ?', [id]);
+    const plataforma1 = await pool.query('SELECT * FROM plataformas WHERE id = ?', [bitacora[0].plataformaId]);
+    const eventos1 = await pool.query('SELECT * FROM eventos WHERE id = ?', [bitacora[0].eventoId]);
+    const usuarioR = await pool.query('SELECT * FROM users WHERE id = ?', [bitacora[0].userId]);
+    const usuarioA = await pool.query('SELECT * FROM users WHERE id = ?', [bitacora[0].atendioid]);
+    const proveedores1 = await pool.query('SELECT * FROM proveedors WHERE id = ?', [bitacora[0].proveedorId]);
+    const factorRiesgos1 = await pool.query('SELECT * FROM factorRiesgos WHERE id = ?', [bitacora[0].factorRiesgoId]);
+    bitacora.forEach(element => {
+          
+      element.fechaDeIncidencia= formatYmd(element.fechaDeIncidencia)
+      element.fechaSolucion= formatYmd(element.fechaSolucion)
+  });
+    res.render('bitacora/edit', {
+        layout: "dashboard",
+        loginAdmin,
+        loginGeneral,
+        plataformas,
+        eventos,
+        usuarios,
+        proveedores,
+        factorRiesgos,
+        plataforma1: plataforma1[0],
+        eventos1: eventos1[0],
+        usuarioR: usuarioR[0],
+        usuarioA:usuarioA[0],
+        proveedores1: proveedores1[0],
+        factorRiesgos1: factorRiesgos1[0],
+        bitacora: bitacora[0]});
+});
 
-// router.post('/edit/:id', async (req, res) => {
-//     const { id } = req.params;
-//     const { factor, eventoRiesgoId } = req.body;
-//     const newefactorRiesgo = {
-//         factor,
-//         eventoRiesgoId
+router.post('/edit/:id',upload, async (req, res) => {
+
+    
+    if (req.file==null) {
+      const { id } = req.params;
+      const { fechaDeIncidencia,horaDeIncidencia,plataformaId,eventoId,descripcion,userId,
+        atendioid,proveedorId,fechaSolucion,horaSolucion,estado,factorRiesgoId
+    } = req.body;
+    
+ 
+    const newbitacora = {
+        fechaDeIncidencia,
+        horaDeIncidencia,
+        plataformaId,
+        eventoId,
+        descripcion,
+        userId,
+        atendioid,
+        proveedorId,
+        fechaSolucion,
+        horaSolucion,
+        estado,
+        factorRiesgoId,
         
-//     };
-//     await pool.query('UPDATE factorRiesgos set ? WHERE id = ?', [newefactorRiesgo, id]);
-//     req.flash('success', 'Evento de Riesgo actualizado');
-//     res.redirect('/factorRiesgo');
-// });
+        
+    };
+   
+    await pool.query('UPDATE bitacoras set ? WHERE id = ?', [newbitacora, id]);
+    req.flash('success', 'bitacora actualizada');
+    res.redirect('/bitacora');}
+    else{
+      const {filename}=req.file;
+      const archivo= filename;
+      const { id } = req.params;
+      const { fechaDeIncidencia,horaDeIncidencia,plataformaId,eventoId,descripcion,userId,
+        atendioid,proveedorId,fechaSolucion,horaSolucion,estado,factorRiesgoId
+    } = req.body;
+    
+  console.log(fechaDeIncidencia);
+    const newbitacora = {
+        fechaDeIncidencia,
+        horaDeIncidencia,
+        plataformaId,
+        eventoId,
+        descripcion,
+        userId,
+        atendioid,
+        proveedorId,
+        fechaSolucion,
+        horaSolucion,
+        estado,
+        factorRiesgoId,
+        archivo
+        
+    };
+    await pool.query('UPDATE bitacoras set ? WHERE id = ?', [newbitacora, id]);
+    req.flash('success', 'bitacora actualizada');
+    res.redirect('/bitacora');
+
+
+
+
+    }
+});
 
 
 router.post('/buscarfecha', isLoggedIn, async (req, res) => {
