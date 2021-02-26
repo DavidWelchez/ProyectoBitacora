@@ -370,9 +370,222 @@ router.post('/buscarfecha', isLoggedIn, async (req, res) => {
     });
 });
 
+var xl = require('excel4node');
+
+var wb = new xl.Workbook();
+
+var ws = wb.addWorksheet('Bitacora');
+
+var style = wb.createStyle({
+  font: {
+    
+    size: 12,
+  },
+  numberFormat: '$#,##0.00; ($#,##0.00); -',
+});
 
 
 
+
+router.get('/doc', isLoggedIn, roles,async (req, res) => {
+  var loginAdmin = false;
+  var loginGeneral = false;
+
+  rol = req.user.rol;
+  if(rol == "Admin") {
+      loginAdmin = true;
+      }
+      if(rol == "General") {
+          loginGeneral = true;
+          }
+  
+  res.render('bitacora/doc', { 
+      
+      layout: "dashboard",
+      loginAdmin,
+      loginGeneral,
+     
+  });
+});
+
+router.post('/doc', async (req, res) => {
+  const formatYmd= date=> date.toISOString().slice(0,10);
+  const { fecha1,fecha2 } = req.body;
+  const bitacora = await pool.query('SELECT * FROM vistaBi where fechaSolucion  between ? and ? or  fechaDeIncidencia between ? and ?', [fecha1,fecha2,fecha1,fecha2]);
+  bitacora.forEach(element => {
+          
+    element.fechaDeIncidencia= formatYmd(element.fechaDeIncidencia)
+    element.fechaSolucion= formatYmd(element.fechaSolucion)
+});
+
+  ws.cell(1, 2)
+  .string('Fecha de incidencia')
+   .style(style);
+
+   ws.cell(1, 3)
+  .string('Hora de incidencia')
+   .style(style);
+
+   ws.cell(1, 4)
+  .string('Tipo plataforma')
+   .style(style);
+
+   ws.cell(1, 5)
+  .string('Tipo incidente')
+   .style(style);
+   
+   ws.cell(1, 6)
+  .string('Tipo de evento')
+   .style(style);
+
+   ws.cell(1, 7)
+  .string('Descripción')
+   .style(style);
+
+   ws.cell(1, 8)
+  .string('Empleado reportó')
+   .style(style);
+
+   ws.cell(1, 9)
+  .string('Empleado atendió')
+   .style(style);
+
+   ws.cell(1, 10)
+  .string('Proveedor')
+   .style(style);
+
+   ws.cell(1, 11)
+  .string('Fecha de solución')
+   .style(style);
+
+   ws.cell(1, 12)
+  .string('Hora de solución')
+   .style(style);
+
+   ws.cell(1, 13)
+  .string('Estado')
+   .style(style);
+
+   ws.cell(1, 14)
+  .string('Evento de riesgo')
+   .style(style);
+
+   ws.cell(1, 15)
+  .string('Factor de riesgo')
+   .style(style);
+
+
+
+    bitacora.forEach(element => {
+     
+let a=1;
+     
+     
+      ws.cell(bitacora.indexOf(element)+2, 2)
+      .string(element.fechaDeIncidencia)
+    .style(style);
+
+    ws.cell(bitacora.indexOf(element)+2, 3)
+      .string(element.horaDeIncidencia)
+    .style(style);
+  
+    ws.cell(bitacora.indexOf(element)+2, 4)
+      .string(element.incidente)
+    .style(style);
+
+    ws.cell(bitacora.indexOf(element)+2, 5)
+    .string(element.plataforma)
+  .style(style);
+
+     ws.cell(bitacora.indexOf(element)+2, 6)
+    .string(element.evento)
+  .style(style);
+
+  ws.cell(bitacora.indexOf(element)+2, 7)
+  .string(element.descripcion)
+.style(style);
+
+ws.cell(bitacora.indexOf(element)+2, 8)
+.string(element.fullname)
+.style(style);
+
+ws.cell(bitacora.indexOf(element)+2, 9)
+.string(element.atendio)
+.style(style);
+
+ws.cell(bitacora.indexOf(element)+2, 10)
+.string(element.proveedor)
+.style(style);
+
+ws.cell(bitacora.indexOf(element)+2, 11)
+.string(element.fechaSolucion)
+.style(style);
+
+ws.cell(bitacora.indexOf(element)+2, 12)
+.string(element.horaSolucion)
+.style(style);
+  
+ws.cell(bitacora.indexOf(element)+2, 13)
+.string(element.estado)
+.style(style);
+
+ws.cell(bitacora.indexOf(element)+2, 14)
+.string(element.EventoRiesgo)
+.style(style);
+
+ws.cell(bitacora.indexOf(element)+2, 15)
+.string(element.factor)
+.style(style);
+
+
+  
+
+a++;
+
+    });
+
+
+ 
+  // ws.cell(1, 1)
+  // .number(100)
+  // .style(style);
+  
+  // // Set value of cell B1 to 200 as a number type styled with paramaters of style
+  // ws.cell(1, 2)
+  // .number(200)
+  // .style(style);
+  
+  // // Set value of cell C1 to a formula styled with paramaters of style
+  // ws.cell(1, 3)
+  // .formula('A1 + B1')
+  // .style(style);
+  
+  // // Set value of cell A2 to 'string' styled with paramaters of style
+  // ws.cell(2, 1)
+  // .string('string')
+  // .style(style);
+  
+  // // Set value of cell A3 to true as a boolean type styled with paramaters of style but with an adjustment to the font size.
+  // ws.cell(3, 1)
+  // .bool(true)
+  // .style(style)
+  // .style({font: {size: 14}});
+  
+  
+
+  
+  wb.write('Bitacora.xlsx', function(err, stats) {
+    if (err) {
+      console.error(err);
+    } else {
+      console.log(stats); // Prints out an instance of a node.js fs.Stats object
+    }
+  });
+  req.flash('success', 'Archivo creado con exito');
+  res.redirect('/bitacora/doc');
+
+
+});
 
 
   

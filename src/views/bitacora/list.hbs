@@ -3,19 +3,16 @@
     <div  style="padding-left: 5%;" > 
     
  <div class="row">                
-        {{!-- <div class="col-sm-3">  --}}
-            <div class="col"> 
+        <div class="col-sm-3"> 
+            {{!-- <div class="col">  --}}
              <a class="btn btn-success btn2 "  href="/bitacora/add"><i class="fa fa-plus"> Crear Nuevo</i>  </a>
         </div>
-                {{!-- <div class="col-sm-4" style="">
-                 <form action="/bitacora/buscar" method="POST">
-                  <input class="" type="text" name="fullname" placeholder="Buscar" id="fullname" >
-                  <button class="btn btn-success btn3">Buscar</button>
-                 </form> 
-                </div> --}}
+                <div class="col-sm-4" style="">
+                <a class="btn btn-success btn2 "  href="/bitacora/doc">Excel </a>
+                </div>
 
-                {{!-- <div class="col-sm-5"> --}}
-                    <div class="col" style="padding-left: 20%;">
+                <div class="col-sm-5">
+                    {{!-- <div class="col" style="padding-left: 20%;"> --}}
                       <form action="/bitacora/buscarfecha" method="POST">
                   <input class="" type="date" name="fecha1" placeholder="fecha" id="fecha1" >
                    <input class="" type="date" name="fecha2" placeholder="fecha" id="fecha2" >
@@ -42,8 +39,8 @@
                                     <tr>
                                         <th scope="col"> Fecha de incidencia</th>
                                          <th scope="col"> Hora de incidencia</th>
-                                          <th scope="col">Tipo de incidente</th>
                                            <th scope="col">Tipo de plataforma</th>
+                                          <th scope="col">Tipo de incidente</th>
                                            <th scope="col">Tipo de evento</th>
                                            <th scope="col">Descripción</th>
                                            <th scope="col">Empleado reportó</th>
