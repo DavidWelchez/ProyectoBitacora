@@ -67,11 +67,22 @@ router.get('/', isLoggedIn,roles, async (req, res) => {
     });
 });
 
+
 router.get('/delete/:id',isLoggedIn,roles, async (req, res) => {
     const { id } = req.params;
-    await pool.query('DELETE FROM factorRiesgos WHERE ID = ?', [id]);
-    req.flash('success', 'Factor de  Riesgo eliminado');
+    const factorRiesgos = await pool.query('SELECT * FROM bitacoras WHERE factorRiesgoId = ? ',[id]);
+    if (factorRiesgos[0]==null){
+        const { id } = req.params;
+        await pool.query('DELETE FROM factorRiesgos WHERE ID = ?', [id]);
+        req.flash('success', 'Factor de  Riesgo eliminado');
     res.redirect('/factorRiesgo');
+    
+}else{
+    req.flash('message', 'ERROR, este campo no puede ser eliminado');
+res.redirect('/factorRiesgo');
+
+}
+  
 });
 
 router.get('/edit/:id', isLoggedIn,roles,async (req, res) => {

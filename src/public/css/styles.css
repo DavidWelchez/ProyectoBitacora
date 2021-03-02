@@ -51,7 +51,7 @@ background: url('https://i.pinimg.com/originals/1d/da/26/1dda26bbc0424889bd543d4
   padding: 0;
 }
 
-@media (min-width: 992px) {
+@media (min-width: 800px) {
   .masthead {
     height: 100vh;
   }

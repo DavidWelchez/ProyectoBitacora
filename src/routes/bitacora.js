@@ -66,7 +66,7 @@ const bodyParser = require('body-parser');
 //   }
 // };
 
-// Opciones de configuración para multer en productos
+// Opciones de configuración para multer 
 const configuracionMulter = {
   
   // Tamaño máximo del archivo en bytes
@@ -89,9 +89,7 @@ const configuracionMulter = {
       cb(null, `${shortid.generate()}.${extension}`);
     },
   })),
-  // Verificar el tipo de archivo mediante el mime type
-  // https://developer.mozilla.org/es/docs/Web/HTTP/Basics_of_HTTP/MIME_types
-
+ 
 };
 
 // Función que sube el archivo
@@ -129,7 +127,7 @@ router.get('/add', isLoggedIn, async (req, res) => {
 });
 
 router.post('/add',upload, async (req, res) => {
-  console.log(req.file);
+  
   
      if (req.file==null) {
       const { fechaDeIncidencia,horaDeIncidencia,plataformaId,eventoId,descripcion,userId,
@@ -355,7 +353,7 @@ router.post('/buscarfecha', isLoggedIn, async (req, res) => {
 
      const { fecha1,fecha2 } = req.body;
      const formatYmd= date=> date.toISOString().slice(0,10);
-    const bitacorafecha = await pool.query('SELECT * FROM vistaBi where fechaSolucion  between ? and ? or  fechaDeIncidencia between ? and ?', [fecha1,fecha2,fecha1,fecha2]);
+    const bitacorafecha = await pool.query('SELECT * FROM vistaBi where fechaSolucion  between ? and ? or  fechaDeIncidencia between ? and ? order by fechaSolucion', [fecha1,fecha2,fecha1,fecha2]);
     bitacorafecha.forEach(element => {
           
         element.fechaDeIncidencia= formatYmd(element.fechaDeIncidencia)
@@ -369,8 +367,11 @@ router.post('/buscarfecha', isLoggedIn, async (req, res) => {
         bitacorafecha 
     });
 });
-
+const path = require("path");
 var xl = require('excel4node');
+var pdfMake = require('pdfmake');
+const pdf = require('html-pdf');
+   
 
 var wb = new xl.Workbook();
 
@@ -381,13 +382,30 @@ var style = wb.createStyle({
     
     size: 12,
   },
-  numberFormat: '$#,##0.00; ($#,##0.00); -',
+  cell:{
+    fillColor: '#11bf0b',
+  },
+  numberFormat: '##0; (##0); -',
 });
+var style2 = wb.createStyle({
+  font: {
+    size: 12,
+  },
+  
+    Color: '#11bf0b',
+
+  numberFormat: '##0; (##0); -',
+});
+/*pdf*/
+
+src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.70/pdfmake.min.js" ;integrity="sha512-HLbtvcctT6uyv5bExN/qekjQvFIl46bwjEq6PBvFogNfZ0YGVE+N3w6L+hGaJsGPWnMcAQ2qK8Itt43mGzGy8Q==" ;crossorigin="anonymous";
+ src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.70/vfs_fonts.js" ;integrity="sha512-vv3EN6dNaQeEWDcxrKPFYSFba/kgm//IUnvLPMPadaUf5+ylZyx4cKxuc4HdBf0PPAlM7560DV63ZcolRJFPqA=="; crossorigin="anonymous" ;
+    
 
 
 
 
-router.get('/doc', isLoggedIn, roles,async (req, res) => {
+router.get('/doc', isLoggedIn, async (req, res) => {
   var loginAdmin = false;
   var loginGeneral = false;
 
@@ -411,182 +429,215 @@ router.get('/doc', isLoggedIn, roles,async (req, res) => {
 router.post('/doc', async (req, res) => {
   const formatYmd= date=> date.toISOString().slice(0,10);
   const { fecha1,fecha2 } = req.body;
-  const bitacora = await pool.query('SELECT * FROM vistaBi where fechaSolucion  between ? and ? or  fechaDeIncidencia between ? and ?', [fecha1,fecha2,fecha1,fecha2]);
+  const bitacora = await pool.query('SELECT * FROM vistaBi where fechaSolucion  between ? and ? or  fechaDeIncidencia between ? and ? order by fechaSolucion', [fecha1,fecha2,fecha1,fecha2]);
   bitacora.forEach(element => {
           
     element.fechaDeIncidencia= formatYmd(element.fechaDeIncidencia)
     element.fechaSolucion= formatYmd(element.fechaSolucion)
 });
-
-  ws.cell(1, 2)
+ws.cell(1, 6)
+.string('BITÁCORA DE DEPARTAMENTO DE TECNOLOGÍA.')
+ .style(style2);
+ ws.cell(2, 7)
+.string('Departamento Informática.')
+ .style(style2);
+ws.cell(4, 1)
+.string('No.')
+ .style(style);
+  ws.cell(4, 2)
   .string('Fecha de incidencia')
    .style(style);
 
-   ws.cell(1, 3)
+   ws.cell(4, 3)
   .string('Hora de incidencia')
    .style(style);
 
-   ws.cell(1, 4)
+   ws.cell(4, 4)
   .string('Tipo plataforma')
    .style(style);
 
-   ws.cell(1, 5)
+   ws.cell(4, 5)
   .string('Tipo incidente')
    .style(style);
    
-   ws.cell(1, 6)
+   ws.cell(4, 6)
   .string('Tipo de evento')
    .style(style);
 
-   ws.cell(1, 7)
+   ws.cell(4, 7)
   .string('Descripción')
    .style(style);
 
-   ws.cell(1, 8)
+   ws.cell(4, 8)
   .string('Empleado reportó')
    .style(style);
 
-   ws.cell(1, 9)
+   ws.cell(4, 9)
   .string('Empleado atendió')
    .style(style);
 
-   ws.cell(1, 10)
+   ws.cell(4, 10)
   .string('Proveedor')
    .style(style);
 
-   ws.cell(1, 11)
+   ws.cell(4, 11)
   .string('Fecha de solución')
    .style(style);
 
-   ws.cell(1, 12)
+   ws.cell(4, 12)
   .string('Hora de solución')
    .style(style);
 
-   ws.cell(1, 13)
+   ws.cell(4, 13)
   .string('Estado')
    .style(style);
 
-   ws.cell(1, 14)
+   ws.cell(4, 14)
   .string('Evento de riesgo')
    .style(style);
 
-   ws.cell(1, 15)
+   ws.cell(4, 15)
   .string('Factor de riesgo')
    .style(style);
 
 
-
     bitacora.forEach(element => {
-     
-let a=1;
-     
-     
-      ws.cell(bitacora.indexOf(element)+2, 2)
+      ws.cell(bitacora.indexOf(element)+5, 1)
+      .number(bitacora.indexOf(element)+1)
+    .style(style);
+
+      ws.cell(bitacora.indexOf(element)+5, 2)
       .string(element.fechaDeIncidencia)
     .style(style);
 
-    ws.cell(bitacora.indexOf(element)+2, 3)
+    ws.cell(bitacora.indexOf(element)+5, 3)
       .string(element.horaDeIncidencia)
     .style(style);
   
-    ws.cell(bitacora.indexOf(element)+2, 4)
+    ws.cell(bitacora.indexOf(element)+5, 4)
       .string(element.incidente)
     .style(style);
 
-    ws.cell(bitacora.indexOf(element)+2, 5)
+    ws.cell(bitacora.indexOf(element)+5, 5)
     .string(element.plataforma)
   .style(style);
 
-     ws.cell(bitacora.indexOf(element)+2, 6)
+     ws.cell(bitacora.indexOf(element)+5, 6)
     .string(element.evento)
   .style(style);
 
-  ws.cell(bitacora.indexOf(element)+2, 7)
+  ws.cell(bitacora.indexOf(element)+5, 7)
   .string(element.descripcion)
 .style(style);
 
-ws.cell(bitacora.indexOf(element)+2, 8)
+ws.cell(bitacora.indexOf(element)+5, 8)
 .string(element.fullname)
 .style(style);
 
-ws.cell(bitacora.indexOf(element)+2, 9)
+ws.cell(bitacora.indexOf(element)+5, 9)
 .string(element.atendio)
 .style(style);
 
-ws.cell(bitacora.indexOf(element)+2, 10)
+ws.cell(bitacora.indexOf(element)+5, 10)
 .string(element.proveedor)
 .style(style);
 
-ws.cell(bitacora.indexOf(element)+2, 11)
+ws.cell(bitacora.indexOf(element)+5, 11)
 .string(element.fechaSolucion)
 .style(style);
 
-ws.cell(bitacora.indexOf(element)+2, 12)
+ws.cell(bitacora.indexOf(element)+5, 12)
 .string(element.horaSolucion)
 .style(style);
   
-ws.cell(bitacora.indexOf(element)+2, 13)
+ws.cell(bitacora.indexOf(element)+5, 13)
 .string(element.estado)
 .style(style);
 
-ws.cell(bitacora.indexOf(element)+2, 14)
+ws.cell(bitacora.indexOf(element)+5, 14)
 .string(element.EventoRiesgo)
 .style(style);
 
-ws.cell(bitacora.indexOf(element)+2, 15)
+ws.cell(bitacora.indexOf(element)+5, 15)
 .string(element.factor)
 .style(style);
 
-
-  
-
-a++;
-
     });
-
-
- 
-  // ws.cell(1, 1)
-  // .number(100)
-  // .style(style);
-  
-  // // Set value of cell B1 to 200 as a number type styled with paramaters of style
-  // ws.cell(1, 2)
-  // .number(200)
-  // .style(style);
-  
-  // // Set value of cell C1 to a formula styled with paramaters of style
-  // ws.cell(1, 3)
-  // .formula('A1 + B1')
-  // .style(style);
-  
-  // // Set value of cell A2 to 'string' styled with paramaters of style
-  // ws.cell(2, 1)
-  // .string('string')
-  // .style(style);
-  
-  // // Set value of cell A3 to true as a boolean type styled with paramaters of style but with an adjustment to the font size.
-  // ws.cell(3, 1)
-  // .bool(true)
-  // .style(style)
-  // .style({font: {size: 14}});
-  
-  
-
-  
-  wb.write('Bitacora.xlsx', function(err, stats) {
-    if (err) {
-      console.error(err);
-    } else {
-      console.log(stats); // Prints out an instance of a node.js fs.Stats object
-    }
-  });
+   
+  wb.write(path.join(__dirname, "../uploads/Bitacora.xlsx"));
   req.flash('success', 'Archivo creado con exito');
   res.redirect('/bitacora/doc');
+});
 
+router.get('/pdf', isLoggedIn, async (req, res) => {
+  var loginAdmin = false;
+  var loginGeneral = false;
 
+  rol = req.user.rol;
+  if(rol == "Admin") {
+      loginAdmin = true;
+      }
+      if(rol == "General") {
+          loginGeneral = true;
+          }
+  
+  res.render('bitacora/pdf', { 
+    layout: "dashboard",
+    loginAdmin,
+    loginGeneral,
+      
+     
+  });
+});
+
+router.post('/pdfList', isLoggedIn, async (req, res) => {
+  var loginAdmin = false;
+  var loginGeneral = false;
+
+  rol = req.user.rol;
+  if(rol == "Admin") {
+      loginAdmin = true;
+      }
+      if(rol == "General") {
+          loginGeneral = true;
+          }
+
+   const { fecha1,fecha2 } = req.body;
+   const formatYmd= date=> date.toISOString().slice(0,10);
+  const bitacorapdf = await pool.query('SELECT * FROM vistaBi where fechaSolucion  between ? and ? or  fechaDeIncidencia between ? and ? order by fechaSolucion', [fecha1,fecha2,fecha1,fecha2]);
+  bitacorapdf.forEach(element => {
+        
+      element.fechaDeIncidencia= formatYmd(element.fechaDeIncidencia)
+      element.fechaSolucion= formatYmd(element.fechaSolucion)
+  });
+  res.render('bitacora/pdfList', { 
+      
+      layout: "pdf",
+      loginAdmin,
+      loginGeneral,
+      bitacorapdf 
+  });
 });
 
 
+router.get('/menu', isLoggedIn, async (req, res) => {
+  var loginAdmin = false;
+  var loginGeneral = false;
+
+  rol = req.user.rol;
+  if(rol == "Admin") {
+      loginAdmin = true;
+      }
+      if(rol == "General") {
+          loginGeneral = true;
+          }
   
+  res.render('bitacora/menu', { 
+    layout: "dashboard",
+    loginAdmin,
+    loginGeneral,
+      
+     
+  });
+});
 module.exports = router;

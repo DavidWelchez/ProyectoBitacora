@@ -1,17 +1,19 @@
 <div class="container" > 
     <h1 class="text-center">BITÁCORA</h1>
-    <div  style="padding-left: 12%;" > 
+    <div  style="padding-left: 5%;" > 
     
- <div class="row">                
-        <div class="col-sm-3"> 
+<div class="row">   
+
+           <div class="col-sm-1" style="">
+               
+                 <a  href="/bitacora" title="Refrescar"><i class="fas fa-arrow-circle-left fa-2x" style="color: rgb(35, 148, 0);"></i> 
+                                    </a>
+    </div>             
+        <div class="col-sm-6"> 
              <a class="btn btn-success btn2 "  href="/bitacora/add"><i class="fa fa-plus"> Crear Nuevo</i>  </a>
         </div>
-                <div class="col-sm-4" style="">
-                 <form action="/bitacora/buscar" method="POST">
-                  <input class="" type="text" name="fullname" placeholder="Buscar" id="fullname" >
-                  <button class="btn btn-success btn3">Buscar</button>
-                 </form> 
-                </div>
+          
+                
 
                 <div class="col-sm-5">
                       <form action="/bitacora/buscarfecha" method="POST">
@@ -21,10 +23,11 @@
                   <button class="btn btn-success btn3">Buscar</button>
                  </form> 
                 </div>
-      </div>
+                </div>
+
    
     <div id="" class="overflow-auto overflow-hidden">
-        <div id="table-wrapper"></div>
+        <div id="table-wrapper2">
   <div id="table-scroll">
         
                     <div class="row" >
@@ -34,13 +37,15 @@
 
                           
 
-                            <table class="table">
-                                <thead>
+                            
+                            <table class="table table-striped table-hover table-bordered">
+                                <thead class="table-light">
+                                
                                     <tr>
                                         <th scope="col"> Fecha de incidencia</th>
                                          <th scope="col"> Hora de incidencia</th>
-                                          <th scope="col">Tipo de incidente</th>
                                            <th scope="col">Tipo de plataforma</th>
+                                          <th scope="col">Tipo de incidente</th>
                                            <th scope="col">Tipo de evento</th>
                                            <th scope="col">Descripción</th>
                                            <th scope="col">Empleado reportó</th>
@@ -51,6 +56,9 @@
                                            <th scope="col">Estado</th>
                                            <th scope="col">Evento de riesgo</th>
                                            <th scope="col">Factor de riesgo</th>
+                                           <th scope="col">Archivo</th>
+                                           <th scope="col"></th>
+                                           <th scope="col"></th>
 
                                         
                                     </tr>
@@ -72,11 +80,19 @@
                                 <td>{{estado}}</td>
                                 <td>{{EventoRiesgo}}</td>
                                 <td>{{factor}}</td>
+                                {{#if archivo}}
+                                <td><a href="/{{archivo}}" alt="No contiene archivo" download>
 
+                                 
+                                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/File-Explorer-fluent-icon.png/220px-File-Explorer-fluent-icon.png" width="50" height="50" alt="No contiene archivo" > </a></td>
+{{else}}
+<td>
 
+                                 
+                                 <img src="https://static.thenounproject.com/png/140281-200.png" width="50" height="50" alt="No contiene archivo" > </td>
+{{/if}}
 
-
-                                     <td>
+      <td>
                                         <a  href="/bitacora/delete/{{id}}" onClick="alert('¿Desea eliminar este registro?')"  aria-label="borrar" >
                                         
                          <i  class="fas fa-trash-alt" title="Eliminar" style="color: #f80000;  " aria-hidden="true" ></i> 
@@ -87,6 +103,7 @@
 
                                        <a  href="/bitacora/edit/{{id}}" aria-checked="actualizar"><i class="fas fa-pencil-alt" title="Editar" style="color: rgb(35, 148, 0);  " aria-hidden="true" ></i> </a>
                                     </td>
+                                    
                                     
                                     
 
@@ -102,18 +119,11 @@
                         
                     </div>
                 </div>
-
+</div>
             </div>
-
 
         </div>
     </div>
 
 
-</div>
- </div>
-
-
-</div>
-</div>
 

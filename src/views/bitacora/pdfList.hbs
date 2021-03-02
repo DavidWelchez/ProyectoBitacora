@@ -1,0 +1,58 @@
+
+    <h1 class="text-center">BITÁCORA DEPARTAMENTO DE TECNOLOGÍA</h1>
+    <h2 class="text-center">COOPERATIVA NUEVA VIDA LIMITADA.</h2>
+  
+   
+
+                          
+
+                            
+                            <table class="table  table-bordered">
+                                <thead class="table-light">
+                                
+                                    <tr>
+                                        <th scope="col"> Fecha de incidencia</th>
+                                         <th scope="col"> Hora de incidencia</th>
+                                           <th scope="col">Tipo de plataforma</th>
+                                          <th scope="col">Tipo de incidente</th>
+                                           <th scope="col">Tipo de evento</th>
+                                           <th scope="col">Descripción</th>
+                                           <th scope="col">Empleado reportó</th>
+                                           <th scope="col">Empleado atendió</th>
+                                           <th scope="col">Proveedor</th>
+                                           <th scope="col">Fecha de solución</th>
+                                           <th scope="col">Hora de solución</th>
+                                           <th scope="col">Estado</th>
+                                           <th scope="col">Evento de riesgo</th>
+                                           <th scope="col">Factor de riesgo</th>
+                                      
+                                        
+                                    </tr>
+                                </thead>
+                                {{#each bitacorapdf }}
+                                <tr>
+
+                                <td>{{fechaDeIncidencia}}</td>
+                                <td>{{horaDeIncidencia}}</td>
+                                <td>{{incidente}}</td>
+                                <td>{{plataforma}}</td>
+                                <td>{{evento}}</td>
+                                <td>{{descripcion}}</td>
+                                <td>{{fullname}}</td>
+                                <td>{{atendio}}</td>
+                                <td>{{proveedor}}</td>
+                                <td>{{fechaSolucion}}</td>
+                                <td>{{horaSolucion}}</td>
+                                <td>{{estado}}</td>
+                                <td>{{EventoRiesgo}}</td>
+                                <td>{{factor}}</td>
+                                 
+
+                                </tr>
+                                {{else}}
+     <th></th>  
+     <th>Aún no se han agregado datos.</th>
+    </tr>
+    {{/each}}
+                            </table>
+                     

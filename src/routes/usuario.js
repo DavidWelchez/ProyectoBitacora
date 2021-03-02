@@ -71,11 +71,29 @@ router.get('/', isLoggedIn,roles, async (req, res) => {
 
 router.get('/delete/:id',isLoggedIn,roles, async (req, res) => {
     const { id } = req.params;
-    await pool.query('DELETE FROM users WHERE ID = ?', [id]);
-    req.flash('success', 'Usuario eliminado');
+    const users = await pool.query('SELECT * FROM bitacoras WHERE userId = ? ',[id]);
+    const atendio = await pool.query('SELECT * FROM bitacoras WHERE atendioid = ? ',[id]);
+    if (users[0]==null){
+        if (atendio[0]==null){
+        const { id } = req.params;
+        await pool.query('DELETE FROM users WHERE ID = ?', [id]);
+        req.flash('success', 'Usuario eliminado');
     res.redirect('/usuario');
-});
+    
+}else{
+    req.flash('message', 'ERROR, este campo no puede ser eliminado');
+res.redirect('/usuario');
 
+}
+}
+else{
+    req.flash('message', 'ERROR, este campo no puede ser eliminado');
+res.redirect('/usuario');
+
+}
+
+  
+});
 router.get('/editpass/:id', isLoggedIn,roles,async (req, res) => {
     var loginAdmin = false;
     var loginGeneral = false;
@@ -107,7 +125,7 @@ router.post('/editpass/:id', async (req, res) => {
     };
     newusuario.password = await helpers.encryptPassword(password);
     await pool.query('UPDATE users set ? WHERE id = ?', [newusuario, id]);
-    req.flash('success', 'Contrasena actualizado');
+    req.flash('success', 'Contraseña actualizada');
     res.redirect('/usuario');
 });
 
@@ -217,7 +235,7 @@ router.post('/editpassperfil/:id', async (req, res) => {
             };
             newpass.password = await helpers.encryptPassword(newpassword);
             await pool.query('UPDATE users set ? WHERE id = ?', [newpass, id]);
-            req.flash('success', 'Contraseña actualizado');
+            req.flash('success', 'Contraseña actualizada');
             res.redirect('/usuario/perfil'); 
           }else{
              req.flash('message', 'Contraseñas no coinciden');

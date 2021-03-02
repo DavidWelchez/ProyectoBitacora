@@ -23,43 +23,41 @@ passport.use('local.signin', new LocalStrategy({
   }
 }));
 
-passport.use('local.signup', new LocalStrategy({
-  usernameField: 'username',
-  passwordField: 'password',
-  passReqToCallback: true
-}, async (req, username, password, done) => {
-  const { fullname , email} = req.body;
+// passport.use('local.signup', new LocalStrategy({
+//   usernameField: 'username',
+//   passwordField: 'password',
+//   passReqToCallback: true
+// }, async (req, res,username, password, done) => {
+//   const { fullname , email} = req.body;
 
-  const usuario = await pool.query('SELECT * FROM users WHERE username = ? ',username);
-  const useemail = await pool.query('SELECT * FROM users WHERE email = ? ',email);
+//   const usuario = await pool.query('SELECT * FROM users WHERE username = ? ',username);
+//   const useemail = await pool.query('SELECT * FROM users WHERE email = ? ',email);
 
 
-  const rol='General';
-  if (usuario[0]==null){
-    if (useemail[0]==null){
+//   const rol='General';
+//   if (usuario[0]==null){
+//     if (useemail[0]==null){
 
-      let newUser = {
-        fullname,
-        username,
-        password,
-        rol,
-        email
+//       let newUser = {
+//         fullname,
+//         username,
+//         password,
+//         rol,
+//         email
         
-      };
-      newUser.password = await helpers.encryptPassword(password);
-      // Saving in the Database
-      const result = await pool.query('INSERT INTO users SET ? ', newUser);
-      newUser.id = result.insertId;
-      return done(null, newUser);
-
-    }else{
-      return done(null, false, req.flash('message', 'El correo ya esta en uso.'));
-    }
-  }
-  else{
-    return done(null, false, req.flash('message', 'El nombre de usuario ya esta en uso.'));
-  }
-}));
+//       };
+//       newUser.password = await helpers.encryptPassword(password);
+//       // Saving in the Database
+//       const result = await pool.query('INSERT INTO users SET ? ', newUser);
+//       res.redirect('/usuario');
+//     }else{
+//       return done(null, false, req.flash('message', 'El correo ya esta en uso.'));
+//     }
+//   }
+//   else{
+//     return done(null, false, req.flash('message', 'El nombre de usuario ya esta en uso.'));
+//   }
+// }));
 
 passport.serializeUser((user, done) => {
   done(null, user.id);

@@ -1,15 +1,15 @@
 
-     <div class="container " style="padding-left: 26%; padding-top: 2%;">
+  <div class="container " style="padding-left: 20%; padding-top: 2%;">
      <div class="row">
         <div class="col-md-1">
    
-                    <a href="/bitacora/menu">
+                    <a href="/bitacora">
                     <i class="fas fa-arrow-circle-left fa-2x" title="Ir a la página anterior" style="color: rgb(35, 148, 0);"></i>
                     </a> 
 </div>
                     <div class="col" >
   
-                    <h2>Generar archivo Excel.</h2>
+                    <h2>En que formato desea su reporte.</h2>
 
                     </div>
                     
@@ -17,55 +17,21 @@
 
 </div>
 </div>
-
-
-
-<div class="container">
+<div class="container" >
     <div class="row">
         <div class="col-md-5 mx-auto">
 
             <div class="card">
-                <div class="card-body">
-                    <form action="/bitacora/doc" method="POST">
-                  
-                  
-                        <div class="form-group" style="padding-left: 6%;">
-                            <label >del</label>
-                            <input class="" type="date" name="fecha1" placeholder="fecha" id="fecha1" >
-                      <label >al</label>
-                            <input class="" type="date" name="fecha2" placeholder="fecha" id="fecha2" >
-                        </div>
-
-        
-                       
-                        <div class="form-group">
-                            <button class="btn btn-success btn3 btn-block">
-                                Guardar
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-
-<div class="container">
-    <div class="row">
-        <div class="col-md-5 mx-auto">
-
-            <div class="card">
-                <h3 class="text-center">Descargar archivo.</h3>
-                <div class="card-body" style="padding-left: 40%;">
+              
+                <div class="card-body" style="padding-left: 30%;">
                     
-                      <a href= "/Bitacora.xlsx" alt="No contiene archivo" download>
+                      <a href= "/Bitacora/doc" alt="No contiene archivo" title="Excel">
            
                                  <img src="data:image/png;base64,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" width="70" height="60" alt="No contiene archivo" > </a></td>
                         
-                    
-                                
+                        <a href= "/Bitacora/pdf" alt="No contiene archivo" title="PDF" >
+           
+                                 <img src="https://clavebursatil.com/wp-content/uploads/2020/10/pdf-icon-1.png" width="60" height="60" alt="No contiene archivo" > </a></td>
                         </div>
                         
                         </div>
