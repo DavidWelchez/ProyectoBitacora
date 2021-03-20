@@ -64,6 +64,7 @@ app.use('/evento', require('./routes/evento'));
 app.use('/plataforma', require('./routes/plataforma'));
 app.use('/usuario', require('./routes/usuario'));
 app.use('/bitacora', require('./routes/bitacora'));
+app.use('/Bitacorapp', require('./routes/Bitacorapp'));
 
 
 
