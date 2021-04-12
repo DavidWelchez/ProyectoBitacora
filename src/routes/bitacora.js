@@ -92,8 +92,12 @@ const configuracionMulter = {
  
 };
 
+
 // Función que sube el archivo
 const upload = multer(configuracionMulter).single("archivo");
+
+
+
 
 router.get('/add', isLoggedIn, async (req, res) => {
 
@@ -157,6 +161,7 @@ router.post('/add',upload, async (req, res) => {
     res.redirect('/bitacora');
      }else{
       const {filename}=req.file;
+      console.log(req.file);
       const archivo= filename;
      const { fechaDeIncidencia,horaDeIncidencia,plataformaId,eventoId,descripcion,userId,
          atendioid,proveedorId,fechaSolucion,horaSolucion,estado,factorRiesgoId
@@ -200,7 +205,7 @@ router.get('/', isLoggedIn, async (req, res) => {
             }
             const formatYmd= date=> date.toISOString().slice(0,10);
            
-const bitacora = await pool.query(' SELECT bitacoras.id, bitacoras.fechaDeIncidencia,bitacoras.horaDeIncidencia,incidentes.incidente,plataformas.plataforma,eventos.evento,bitacoras.descripcion,u.fullname,ua.fullname as atendio,proveedors.proveedor,bitacoras.fechaSolucion, bitacoras.horaSolucion, bitacoras.estado,eventoRiesgos.EventoRiesgo,factorRiesgos.factor,bitacoras.archivo FROM bitacoras, users as u,users as ua, proveedors,plataformas, incidentes,factorRiesgos,eventos,eventoRiesgos where plataformas.incidenteId=incidentes.id and bitacoras.plataformaId=plataformas.id and bitacoras.eventoId=eventos.id and bitacoras.userId=u.id  and bitacoras.atendioid=ua.id and bitacoras.proveedorId=proveedors.id and factorRiesgos.eventoRiesgoId=eventoRiesgos.id and bitacoras.factorRiesgoId=factorRiesgos.id ');
+const bitacora = await pool.query(' SELECT bitacoras.id, bitacoras.fechaDeIncidencia,bitacoras.horaDeIncidencia,incidentes.incidente,plataformas.plataforma,eventos.evento,bitacoras.descripcion,u.fullname,ua.fullname as atendio,proveedors.proveedor,bitacoras.fechaSolucion, bitacoras.horaSolucion, bitacoras.estado,eventoRiesgos.EventoRiesgo,factorRiesgos.factor,bitacoras.archivo FROM bitacoras, users as u,users as ua, proveedors,plataformas, incidentes,factorRiesgos,eventos,eventoRiesgos where plataformas.incidenteId=incidentes.id and bitacoras.plataformaId=plataformas.id and bitacoras.eventoId=eventos.id and bitacoras.userId=u.id  and bitacoras.atendioid=ua.id and bitacoras.proveedorId=proveedors.id and factorRiesgos.eventoRiesgoId=eventoRiesgos.id and bitacoras.factorRiesgoId=factorRiesgos.id order by id desc');
       
 bitacora.forEach(element => {
           

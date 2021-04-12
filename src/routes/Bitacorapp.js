@@ -7,7 +7,19 @@ const shortid = require("shortid");
 router.use(cors());
 router.use(express.json());
 
-// Opciones de configuración para multer 
+// var multer  = require('multer');
+// var storage = multer.diskStorage({
+//     destination: (req, file, cb) => {
+//       cb(null, `${__dirname}../../uploads`);
+      
+//     },
+    
+//     filename: (req, file, cb) => {
+//       console.log(file,'hola');
+//     }
+// });
+// var upload = multer({storage: storage});
+
 const configuracionMulter = {
   
   // Tamaño máximo del archivo en bytes
@@ -19,7 +31,7 @@ const configuracionMulter = {
   storage: (fileStorage = multer.diskStorage({
       
     destination: (req, res, cb) => {
-     
+      console.log('sii');
       cb(null, `${__dirname}../../uploads`);
     },
     filename: (req, file, cb) => {
@@ -33,29 +45,11 @@ const configuracionMulter = {
  
 };
 
+
 // Función que sube el archivo
-var upload = multer(configuracionMulter).single("archivo");
+var file;
+var upload = multer(configuracionMulter).single('archivo');
 
-//MULTER
-exports.subirImagen = (req, res, next) => {
-  // Verificar que no existen errores de validación
-  const errores = validationResult(req);
-  const messages = [];
-
-  if (!errores.isEmpty) {
-    errores.array().map((error) => {
-      messages.push({ message: error.msg, alertType: "danger" });
-    });
-
-    req.flash("messages", messages);
-    res.redirect("/miperfil");
-  } else {
-    // Subir el archivo mediante Multer
-    upload(req, res, function (error) {
- 
-    });
-  }
-};
 
 
 
@@ -102,25 +96,34 @@ router.get('/listFactorRiesgos' , async (req, res) => {
   
 });
 
+// router.post('/addBitacora',upload,function(req, res) {
+//   const obj = req.body
+//  console.log=(obj);
+//  pool.query( obj, function(error, results, fields){
+//       res.json(results.insertId)
+//    });
 
-router.post('/addBitacora' , (req, res) => {
-  
-    const obj = req.body
+// })
+router.post('/addBitacora' ,upload,(req, res) => {
+  const obj = req.body;
+  if (req.file) {
+    const {filename}=req.file;
+    obj.archivo=filename;
+  }
 
-    //  req.file=obj.archivo
-
+  // //    file=obj.archivo
+   console.log(obj);
+  //   console.log(obj.archivo);
+  //    var upload = multer(configuracionMulter).single({file});
     // upload(req, res, function (error) {
     //     console.log(req.file)
     // });
-    // console.log(obj.archivo.name);
-    // console.log(upload);
-    // // const {filename}=req.file;
-    // //   const archivo= uri;
-
-
+    //console.log(obj.archivo.name);
+    //console.log(upload);
     const query = "INSERT INTO bitacoras SET ?";  
    pool.query(query, obj, function(error, results, fields){
-       res.json(results.insertId)
+       res.json(results.insertId) 
+
     });
 });
 
