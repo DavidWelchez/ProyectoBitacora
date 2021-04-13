@@ -110,16 +110,8 @@ router.post('/addBitacora' ,upload,(req, res) => {
     const {filename}=req.file;
     obj.archivo=filename;
   }
-
-  // //    file=obj.archivo
    console.log(obj);
-  //   console.log(obj.archivo);
-  //    var upload = multer(configuracionMulter).single({file});
-    // upload(req, res, function (error) {
-    //     console.log(req.file)
-    // });
-    //console.log(obj.archivo.name);
-    //console.log(upload);
+ 
     const query = "INSERT INTO bitacoras SET ?";  
    pool.query(query, obj, function(error, results, fields){
        res.json(results.insertId) 
@@ -145,9 +137,14 @@ bitacora.forEach(element => {
 
 
 
-router.post('/edit/:bitacoraid' ,(req, res) => {
+router.post('/edit/:bitacoraid' ,upload,(req, res) => {
   const obj = req.body
   const { bitacoraid } = req.params;
+ 
+  if (req.file) {
+    const {filename}=req.file;
+    obj.archivo=filename;
+  }
  const query =('UPDATE bitacoras set ? WHERE id = ?');
   //const query = "INSERT INTO bitacoras SET ?";  
   pool.query (query, [obj, bitacoraid], function(error, results, fields){
