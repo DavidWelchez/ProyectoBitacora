@@ -377,7 +377,6 @@ var xl = require('excel4node');
 var pdfMake = require('pdfmake');
 const pdf = require('html-pdf');
    
-
 var wb = new xl.Workbook();
 
 var ws = wb.addWorksheet('Bitacora');

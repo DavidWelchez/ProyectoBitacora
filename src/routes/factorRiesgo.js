@@ -42,7 +42,7 @@ router.post('/add/', async (req, res) => {
     };
     console.log(newfactorRiesgo)
     await pool.query('INSERT INTO factorRiesgos set ?', [newfactorRiesgo]);
-    req.flash('success', 'Evento de Riesgo guardado ');
+    req.flash('success', 'Factor de Riesgo guardado ');
     res.redirect('/factorRiesgo');
 });
 
@@ -119,7 +119,7 @@ router.post('/edit/:id', async (req, res) => {
         
     };
     await pool.query('UPDATE factorRiesgos set ? WHERE id = ?', [newefactorRiesgo, id]);
-    req.flash('success', 'Evento de Riesgo actualizado');
+    req.flash('success', 'Factor de Riesgo actualizado');
     res.redirect('/factorRiesgo');
 });
 
