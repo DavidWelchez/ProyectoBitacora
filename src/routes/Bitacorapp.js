@@ -7,18 +7,6 @@ const shortid = require("shortid");
 router.use(cors());
 router.use(express.json());
 
-// var multer  = require('multer');
-// var storage = multer.diskStorage({
-//     destination: (req, file, cb) => {
-//       cb(null, `${__dirname}../../uploads`);
-      
-//     },
-    
-//     filename: (req, file, cb) => {
-//       console.log(file,'hola');
-//     }
-// });
-// var upload = multer({storage: storage});
 
 const configuracionMulter = {
   
@@ -96,14 +84,7 @@ router.get('/listFactorRiesgos' , async (req, res) => {
   
 });
 
-// router.post('/addBitacora',upload,function(req, res) {
-//   const obj = req.body
-//  console.log=(obj);
-//  pool.query( obj, function(error, results, fields){
-//       res.json(results.insertId)
-//    });
 
-// })
 router.post('/addBitacora' ,upload,(req, res) => {
   const obj = req.body;
   if (req.file) {

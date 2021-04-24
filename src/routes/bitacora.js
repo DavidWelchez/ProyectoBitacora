@@ -8,63 +8,6 @@ const { validationResult } = require("express-validator");
 const shortid = require("shortid");
 const bodyParser = require('body-parser');
       
-// this.express=express();
-//  this.express.use(bodyParser.json());
-// this.express.use(bodyParser.urlencoded({
-//   extended:true
-// }));
-//this.express.use(this.subirArchivo.upload.any());
-// const upload = multer({storage: multer.memoryStorage() });
-// //MULTER
-// subirArchivo = (req, res, next) => {
-//   // Verificar que no existen errores de validación
-//   const errores = validationResult(req);
-//   const messages = [];
-//   console.log('siioo');
-//   if (!errores.isEmpty) {
-//     errores.array().map((error) => {
-//         console.log('if1');
-   
-//       messages.push({ message: error.msg, alertType: "danger" });
-//     });
-
-//     req.flash("message", messages);
-//     res.redirect("/bitacora");
-//   } else {
-//     // Subir el archivo mediante Multer
-//     upload(req, res, function (error) {
-//       if (error) {
-//           console.log('if2');
-//         // Errores de Multer
-//         if (error instanceof multer.MulterError) {
-//           if (error.code === "LIMIT_FILE_SIZE") {
-//             req.flash("message", [
-//               {
-                  
-//                 message:
-//                   "El tamaño del archivo es superior al límite. Máximo 30 mb",
-//                 alertType: "danger",
-                
-//               }, 
-//             ]);console.log('if3');
-//           } else {
-//             req.flash("message", [
-//               { message: error.message, alertType: "danger" },
-//             ]);
-//           }
-//         } else {
-//           // Errores creado por el usuario
-//           req.flash("message", [
-//             { message: error.message, alertType: "danger" },
-//           ]);
-//         }
-//         // Redireccionar y mostrar el error
-//         res.redirect("/bitacora");
-//         return;
-//       } 
-//     });
-//   }
-// };
 
 // Opciones de configuración para multer 
 const configuracionMulter = {
@@ -82,9 +25,6 @@ const configuracionMulter = {
       cb(null, `${__dirname}../../uploads`);
     },
     filename: (req, file, cb) => {
-      // Construir el nombre del archivo
-      // iphone.png --> image/png --> ["image", "png"]
-      // iphone.jpg --> image/jpeg
       const extension = file.mimetype.split("/")[1];
       cb(null, `${shortid.generate()}.${extension}`);
     },
@@ -193,34 +133,34 @@ router.post('/add',upload, async (req, res) => {
 });
 
 router.get('/', isLoggedIn, async (req, res) => {
-    var loginAdmin = false;
-    var loginGeneral = false;
+  var loginAdmin = false;
+  var loginGeneral = false;
 
-    rol = req.user.rol;
-    if(rol == "Admin") {
-        loginAdmin = true;
-        }
-        if(rol == "General") {
-            loginGeneral = true;
-            }
-            const formatYmd= date=> date.toISOString().slice(0,10);
-           
-const bitacora = await pool.query(' SELECT bitacoras.id, bitacoras.fechaDeIncidencia,bitacoras.horaDeIncidencia,incidentes.incidente,plataformas.plataforma,eventos.evento,bitacoras.descripcion,u.fullname,ua.fullname as atendio,proveedors.proveedor,bitacoras.fechaSolucion, bitacoras.horaSolucion, bitacoras.estado,eventoRiesgos.EventoRiesgo,factorRiesgos.factor,bitacoras.archivo FROM bitacoras, users as u,users as ua, proveedors,plataformas, incidentes,factorRiesgos,eventos,eventoRiesgos where plataformas.incidenteId=incidentes.id and bitacoras.plataformaId=plataformas.id and bitacoras.eventoId=eventos.id and bitacoras.userId=u.id  and bitacoras.atendioid=ua.id and bitacoras.proveedorId=proveedors.id and factorRiesgos.eventoRiesgoId=eventoRiesgos.id and bitacoras.factorRiesgoId=factorRiesgos.id order by id desc');
-      
-bitacora.forEach(element => {
-          
-          element.fechaDeIncidencia= formatYmd(element.fechaDeIncidencia)
-          element.fechaSolucion= formatYmd(element.fechaSolucion)
-      });
+  rol = req.user.rol;
+  if (rol == "Admin") {
+    loginAdmin = true;
+  }
+  if (rol == "General") {
+    loginGeneral = true;
+  }
+  const formatYmd = date => date.toISOString().slice(0, 10);
+
+  const bitacora = await pool.query(' SELECT bitacoras.id, bitacoras.fechaDeIncidencia,bitacoras.horaDeIncidencia,incidentes.incidente,plataformas.plataforma,eventos.evento,bitacoras.descripcion,u.fullname,ua.fullname as atendio,proveedors.proveedor,bitacoras.fechaSolucion, bitacoras.horaSolucion, bitacoras.estado,eventoRiesgos.EventoRiesgo,factorRiesgos.factor,bitacoras.archivo FROM bitacoras, users as u,users as ua, proveedors,plataformas, incidentes,factorRiesgos,eventos,eventoRiesgos where plataformas.incidenteId=incidentes.id and bitacoras.plataformaId=plataformas.id and bitacoras.eventoId=eventos.id and bitacoras.userId=u.id  and bitacoras.atendioid=ua.id and bitacoras.proveedorId=proveedors.id and factorRiesgos.eventoRiesgoId=eventoRiesgos.id and bitacoras.factorRiesgoId=factorRiesgos.id order by id desc');
+
+  bitacora.forEach(element => {
+
+    element.fechaDeIncidencia = formatYmd(element.fechaDeIncidencia)
+    element.fechaSolucion = formatYmd(element.fechaSolucion)
+  });
 
 
-res.render('bitacora/list', { 
-        
-        layout: "dashboard",
-        loginAdmin,
-        loginGeneral,
-        bitacora 
-    });
+  res.render('bitacora/list', {
+
+    layout: "dashboard",
+    loginAdmin,
+    loginGeneral,
+    bitacora
+  });
 });
 
 router.get('/delete/:id',isLoggedIn, async (req, res) => {
